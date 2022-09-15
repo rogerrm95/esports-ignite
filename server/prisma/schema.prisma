@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Model = Modelos (Tabelas) //
+// @id = Chave primária //
+model Game {
+  id        String @id @default(uuid())
+  title     String
+  bannerUrl String
+
+  Ads Ads[]
+}
+
+model Ads {
+  id              String   @id @default(uuid())
+  gameId          String
+  name            String
+  yearsPlaying    Int
+  discord         String
+  weekDays        String
+  hourStart       Int
+  hourEnd         Int
+  useVoiceChannel Boolean
+  createdAt       DateTime @default(now())
+
+  // Shortcut - Criar um relacionamento //
+  // 'game Game' e salvar //
+  game Game @relation(fields: [gameId], references: [id])
+}
