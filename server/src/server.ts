@@ -2,9 +2,12 @@
 import express, { request, response } from 'express' // ECMAScript Modules //
 // Prisma Client //
 import { PrismaClient } from '@prisma/client'
+import cors from 'cors'
 
 const app = express()
+
 app.use(express.json()) // Entender JSON //
+app.use(cors()) // Proteger aplicação contra acessos indevidos de um front-end //
 
 const prisma = new PrismaClient({
     log: ['query']
@@ -30,7 +33,6 @@ app.get('/games', async (request, response) => {
 })
 
 app.post('/games/:id/ads', async (request, response) => {
-
     const gameId = request.params.id
     const body = request.body
 
