@@ -1,12 +1,32 @@
-// Styles - Tailwind //
-import './styles/main.css'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import * as Dialog from '@radix-ui/react-dialog'
 // Components //
 import { CreateAdBanner } from './components/CreateAdBanner'
 import { GameCard } from './components/GameCard'
 // Imagens //
 import LogoESports from '../src/assets/logo-esports.svg'
+// Styles - Tailwind //
+import './styles/main.css'
+import { CreateAdModal } from './components/Modal/CreateAdModal'
+
+interface Game {
+  id: string,
+  title: string,
+  bannerUrl: string,
+  _count: {
+    Ads: number
+  }
+}
 
 function App() {
+  const [games, setGames] = useState<Game[]>([])
+
+  useEffect(() => {
+    axios.get('http://localhost:3333/games').then(res => {
+      setGames(res.data)
+    })
+  }, [])
 
   return (
     <div className='max-w-[1344px] mx-auto flex flex-col items-center my-20'>
@@ -18,16 +38,24 @@ function App() {
 
       {/* LISTA DOS GAMES */}
       <div className='grid grid-cols-6 gap-6 mt-16'>
-        <GameCard bannerUrl='/game1.png' name='League of Legends' adsCount={4} />
-        <GameCard bannerUrl='/game2.png' name='Dota 2' adsCount={4} />
-        <GameCard bannerUrl='/game3.png' name='CS.GO' adsCount={4} />
-        <GameCard bannerUrl='/game4.png' name='Apex Legends' adsCount={4} />
-        <GameCard bannerUrl='/game5.png' name='Fortine' adsCount={4} />
-        <GameCard bannerUrl='/game6.png' name='World of Warcraft' adsCount={4} />
+        {
+          games.map(game => (
+            <GameCard
+              key={game.id}
+              bannerUrl={game.bannerUrl}
+              name={game.title}
+              adsCount={game._count.Ads} />
+          ))
+        }
       </div>
 
-      {/* ANUNCIAR - CONTAINER */}
-      <CreateAdBanner />
+      <Dialog.Root>
+        {/* ANUNCIAR - CONTAINER */}
+        <CreateAdBanner />
+        
+        {/* MODAL - PUBLICAR ANUNCIO */}
+        <CreateAdModal />
+      </Dialog.Root>
 
     </div>
   )

@@ -3,6 +3,7 @@ import express, { request, response } from 'express' // ECMAScript Modules //
 // Prisma Client //
 import { PrismaClient } from '@prisma/client'
 import cors from 'cors'
+import { convertHoursToMinutesAmount } from './utils/convertHoursToMinutesAmount'
 
 const app = express()
 
@@ -42,6 +43,8 @@ app.post('/games/:id/ads', async (request, response) => {
     const data = {
         gameId,
         ...body,
+        hourStart: convertHoursToMinutesAmount(body.hourStart),
+        hourEnd: convertHoursToMinutesAmount(body.hourEnd),
         weekDays: body.weekDays.join(','),
     }
 
