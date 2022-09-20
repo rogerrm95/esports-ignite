@@ -4,11 +4,13 @@ import { THEME } from '../../theme';
 
 import { styles } from './styles';
 
-interface GameCardData {
+export interface GameCardData {
     id: string,
-    name: string,
-    ads: string,
-    cover: ImageSourcePropType
+    title: string,
+    bannerUrl: string,
+    _count: {
+        Ads: number
+    }
 }
 
 interface GameCardProps extends TouchableOpacityProps {
@@ -18,15 +20,15 @@ interface GameCardProps extends TouchableOpacityProps {
 export function GameCard({ data, ...rest }: GameCardProps) {
     return (
         <TouchableOpacity style={styles.container} {...rest}>
-            <ImageBackground style={styles.cover} source={data.cover}>
+            <ImageBackground style={styles.cover} source={{ uri: data.bannerUrl }}>
 
                 <LinearGradient colors={THEME.COLORS.FOOTER} style={styles.footer}>
                     <Text style={styles.name}>
-                        {data.name}
+                        {data.title}
                     </Text>
 
                     <Text style={styles.ads}>
-                        {data.ads} anúncio(s)
+                        {data._count.Ads} anúncio(s)
                     </Text>
                 </LinearGradient>
 

@@ -5,10 +5,11 @@ import { PrismaClient } from '@prisma/client'
 import cors from 'cors'
 import { convertHoursToMinutesAmount } from './utils/convertHoursToMinutesAmount'
 
+
 const app = express()
 
-app.use(express.json()) // Entender JSON //
 app.use(cors()) // Proteger aplicação contra acessos indevidos de um front-end //
+app.use(express.json()) // Entender JSON //
 
 const prisma = new PrismaClient({
     log: ['query']
@@ -100,5 +101,5 @@ app.get('/ads/:id/discord', async (request, response) => {
     return response.status(200).json({ discord: ad.discord })
 })
 
-// localhost:3333 //
-app.listen(3333)
+// localhost:8080 //
+app.listen(8080)
