@@ -3,14 +3,15 @@ import { StatusBar } from 'react-native';
 import { Background } from './src/components/Background';
 import { Loading } from './src/components/Loading';
 // Fonts //
-import { useFonts, Inter_400Regular, Inter_700Bold, Inter_900Black } from '@expo-google-fonts/inter'
+import { useFonts, Inter_400Regular, Inter_700Bold, Inter_600SemiBold, Inter_900Black } from '@expo-google-fonts/inter'
 // Rotas //
 import { Routes } from './src/routes';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    Inter_400Regular, 
-    Inter_700Bold, 
+    Inter_400Regular,
+    Inter_700Bold,
+    Inter_600SemiBold,
     Inter_900Black
   })
 
@@ -19,7 +20,7 @@ export default function App() {
       <StatusBar translucent backgroundColor='transparent' />
 
       {
-        fontsLoaded ? <Routes/> : <Loading/>
+        fontsLoaded ? <Routes /> : <Loading />
       }
 
     </Background>
