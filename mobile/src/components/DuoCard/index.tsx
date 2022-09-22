@@ -30,7 +30,7 @@ export function DuoCard({ data, onConnect }: Props) {
 
       <DuoInfo
         label='Disponibilidade'
-        value={`${data.weekDays.length} dias \u2022 ${data.hourStart} - ${data.hourEnd}`} />
+        value={`${data.weekDays.length} dia(s) \u2022 ${data.hourStart} - ${data.hourEnd}`} />
 
       <DuoInfo
         label='Chamada de áudio?'

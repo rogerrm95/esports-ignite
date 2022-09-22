@@ -22,7 +22,7 @@ export function CreateAdModal() {
     const [gameSelected, setGameSelected] = useState('')
 
     useEffect(() => {
-        axios.get('http://localhost:3333/games').then(res => {
+        axios.get('http://localhost:8080/games').then(res => {
             setGames(res.data)
         })
     }, [])
@@ -39,7 +39,7 @@ export function CreateAdModal() {
                 return
             }
 
-            await axios.post(`http://localhost:3333/games/${gameSelected}/ads`, {
+            await axios.post(`http://localhost:8080/games/${gameSelected}/ads`, {
                 name: data.name,
                 yearsPlaying: Number(data.yearsPlaying),
                 discord: data.discord,

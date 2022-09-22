@@ -1,18 +1,28 @@
-import { View, Modal, ModalProps, Text, TouchableOpacity } from 'react-native';
+import { View, Modal, ModalProps, Text, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
+import * as Clipboard from 'expo-clipboard'
 // Icons //
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { CheckCircle } from 'phosphor-react-native'
+// Components //
+import { Heading } from '../Heading';
 // Styles //
 import { styles } from './styles';
 import { THEME } from '../../theme';
-import { Heading } from '../Heading';
+import { useState } from 'react';
 
-interface Props extends ModalProps {
+interface DuoMatchProps extends ModalProps {
     discord: string,
     onClose: () => void
 }
 
-export function DuoMatch({ discord, onClose, ...rest }: Props) {
+export function DuoMatch({ discord, onClose, ...rest }: DuoMatchProps) {
+    const [isCopping, setIsCopping] = useState(false)
+
+    async function handleCopyDiscordUserToClipboard() {
+        setIsCopping(true)
+        await Clipboard.setStringAsync(discord).then(_ => setIsCopping(false))
+        Alert.alert('Discord Copiado!', 'Nome de usuário copiado com sucesso')
+    }
     return (
         <Modal transparent statusBarTranslucent animationType='fade' {...rest}>
             <View style={styles.container}>
@@ -29,9 +39,12 @@ export function DuoMatch({ discord, onClose, ...rest }: Props) {
                         Adicione seu discord
                     </Text>
 
-                    <TouchableOpacity style={styles.discordButton}>
+                    <TouchableOpacity
+                        style={styles.discordButton}
+                        disabled={isCopping}
+                        onPress={handleCopyDiscordUserToClipboard}>
                         <Text style={styles.discord}>
-                            {discord}
+                            {isCopping ? <ActivityIndicator color={THEME.COLORS.PRIMARY} /> : discord}
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -39,3 +52,5 @@ export function DuoMatch({ discord, onClose, ...rest }: Props) {
         </Modal>
     );
 }
+
+// Aula parada: 25:20 //
