@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react'
 import { StatusBar } from 'react-native';
+import { UserContextProvider } from './src/contexts/UserContext';
 // Components //
 import { Background } from './src/components/Background';
 import { Loading } from './src/components/Loading';
@@ -47,14 +48,16 @@ export default function App() {
   }, [])
 
   return (
-    <Background>
-      <StatusBar translucent backgroundColor='transparent' />
+    <UserContextProvider>
+      <Background>
+        <StatusBar translucent backgroundColor='transparent' />
 
-      {
-        fontsLoaded ? <Routes /> : <Loading />
-      }
+        {
+          fontsLoaded ? <Routes /> : <Loading />
+        }
 
-    </Background>
+      </Background>
+    </UserContextProvider>
   );
 }
 
