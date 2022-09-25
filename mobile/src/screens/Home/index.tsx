@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Image, FlatList } from 'react-native';
+import { useEffect, useState, useContext } from 'react';
+import { Image, FlatList, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 import api from '../../services/axios';
@@ -11,6 +11,8 @@ import { GameCard, GameCardData } from '../../components/GameCard';
 import { Heading } from '../../components/Heading';
 // Styles //
 import { styles } from './styles';
+import { UserContext } from '../../contexts/UserContext';
+import { Profile } from '../../components/Profile';
 
 interface Game {
     id: string,
@@ -23,6 +25,7 @@ interface Game {
 
 export function Home() {
     const { navigate } = useNavigation()
+    const { data } = useContext(UserContext)
 
     const [games, setGames] = useState<Game[]>([])
 
@@ -45,6 +48,11 @@ export function Home() {
     return (
         <Background>
             <SafeAreaView style={styles.container}>
+                <View style={styles.header}>
+                    <Profile data={data} />
+                </View>
+
+
                 <Image source={logoIMG} style={styles.logo} />
 
                 <Heading

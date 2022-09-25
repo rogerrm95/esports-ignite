@@ -6,10 +6,16 @@ export const styles = StyleSheet.create({
     alignItems: 'center'
   },
 
+  header: {
+    width: '100%',
+    marginTop: 16,
+    paddingRight: 16,
+  },
+
   logo: {
     width: 214,
     height: 120,
-    marginTop: 74,
+    marginTop: 50,
     marginBottom: 48
   },
 
