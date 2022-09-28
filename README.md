@@ -15,6 +15,7 @@ Projeto desenvolvido durante o #NLW da Rocketseat - 2022.
 # 🧪 Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
+
 Front-End:
 - [ReactJS](https://pt-br.reactjs.org/);
 - [Tailwind CSS](https://tailwindcss.com/);
@@ -33,11 +34,14 @@ Mobile:
 
 # 🚧 E-Sports 2.0
 
-- Validação dos formulários;
-- Responsividade;
+- Validação dos formulários (Web e Mobile);
+- Responsividade (Web);
 - Criar anúncio (Mobile);
 - Landing Page (Web);
-- Sistema de Login com o Discord (Web e Mobile);
+- Consumir dados do Discord (Web e Mobile);
+- Conectar com usuários (Web).
+- Adicionar slider (Web).
+✔ Sistema de Login com o Discord (Web e Mobile);
 
 # 🔖 Layout
 
