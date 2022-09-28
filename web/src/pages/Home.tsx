@@ -10,6 +10,7 @@ import { CreateAdModal } from '../components/Modal/CreateAdModal'
 import LogoESports from '../assets/logo-esports.svg'
 // Styles - Tailwind //
 import '../styles/main.css'
+import { Profile } from '../components/Profile'
 
 interface Game {
     id: string,
@@ -32,7 +33,9 @@ export function Home() {
 
     return (
         <div className='max-w-[1344px] mx-auto flex flex-col items-center my-20 px-4'>
-           <img src={LogoESports} alt="" />
+            <Profile />
+
+            <img src={LogoESports} alt="" />
 
             <h1 className='xl:text-6xl md:text-5xl text-4xl text-white font-black mt-20 nlw-gradient'>
                 Seu <span className='bg-nlw-gradient bg-clip-text text-transparent'>duo</span> está aqui.
