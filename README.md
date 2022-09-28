@@ -41,7 +41,7 @@ Mobile:
 - Consumir dados do Discord (Web e Mobile);
 - Conectar com usuários (Web);
 - Adicionar slider (Web);
-- ✔ Sistema de Login com o Discord (Web e Mobile).
+- Sistema de Login com o Discord (Web e Mobile) ✔.
 
 # 🔖 Layout
 
