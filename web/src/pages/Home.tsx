@@ -23,6 +23,7 @@ interface Game {
 
 export function Home() {
     const { loginWithDiscord, userDiscord } = useUser()
+
     const [games, setGames] = useState<Game[]>([])
 
     useEffect(() => {
@@ -59,7 +60,7 @@ export function Home() {
                 <CreateAdBanner />
 
                 {/* MODAL - PUBLICAR ANUNCIO */}
-                <CreateAdModal />
+                <CreateAdModal/>
             </Dialog.Root>
         </div>
     )

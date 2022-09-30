@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* input[type="time"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+* input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    display: none;
+
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+* input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}

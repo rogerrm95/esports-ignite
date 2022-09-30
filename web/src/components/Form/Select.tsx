@@ -7,7 +7,7 @@ type Game = {
     title: string,
 }
 
-interface SelectProps {
+interface SelectProps extends SelectUI.SelectTriggerProps {
     options: Game[],
     label: string,
     placeholder: string,
@@ -15,11 +15,14 @@ interface SelectProps {
     onSelectedChange: (option: string) => void
 }
 
-export function Select({ options, label, placeholder, name, onSelectedChange }: SelectProps) {
+export function Select({ options, label, placeholder, name, onSelectedChange, ...rest }: SelectProps) {
     return (
         <SelectUI.Root onValueChange={(option) => onSelectedChange(option)}>
-            <SelectUI.Trigger aria-label={label} className='inline-flex items-center justify-between bg-zinc-900 py-3 px-4 rounded text-zinc-500 text-sm'>
-                <SelectUI.Value placeholder={placeholder} />
+            <SelectUI.Trigger
+                aria-label={label}
+                className='inline-flex items-center justify-between bg-zinc-900 py-3 px-4 rounded text-zinc-500 text-sm'
+                {...rest}>
+                <SelectUI.Value placeholder={placeholder}/>
                 <SelectUI.Icon>
                     <CaretDown size={16} />
                 </SelectUI.Icon>
