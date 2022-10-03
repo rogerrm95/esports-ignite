@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useUser } from '../hooks/useUser'
 import axios from 'axios'
 import * as Dialog from '@radix-ui/react-dialog'
 // Slider //
@@ -44,8 +43,6 @@ const breakPointsConfig = {
 }
 
 export function Home() {
-    const { loginWithDiscord, userDiscord } = useUser()
-
     const [swiper, setSwiper] = useState<SwiperProps>({} as SwiperProps);
     const [games, setGames] = useState<Game[]>([])
 
@@ -72,14 +69,16 @@ export function Home() {
                     <CaretLeft size={48} className='text-zinc-500' />
                 </button>
 
-                <Swiper onSwiper={(slider: any) => setSwiper(slider)} breakpoints={breakPointsConfig} style={{zIndex: 0}}>
+                <Swiper onSwiper={(slider: any) => setSwiper(slider)} breakpoints={breakPointsConfig} style={{ zIndex: 0, height: 240, width: '100%' }}>
                     {
                         games.map(game => (
                             <SwiperSlide key={game.id}>
                                 <GameCard
+                                    id={game.id}
                                     bannerUrl={game.bannerUrl}
                                     name={game.title}
-                                    adsCount={game._count.Ads} />
+                                    adsCount={game._count.Ads}
+                                />
                             </SwiperSlide>
                         ))
                     }

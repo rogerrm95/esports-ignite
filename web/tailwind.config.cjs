@@ -16,6 +16,9 @@ module.exports = {
       },
       animation: {
         'spin-slow': 'spin 4s linear infinite',
+      },
+      boxShadow: {
+        '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.9)',
       }
     },
   },

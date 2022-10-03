@@ -13,7 +13,9 @@ import { CaretDown, Check, GameController, Spinner } from 'phosphor-react'
 import { Input } from "../Form/Input"
 import { ErrorMessage } from '../ErrorMessage'
 import { Select } from '../Form/Select'
+import { useUser } from '../../hooks/useUser'
 
+// Regex //
 const discordRegex = new RegExp('^.{3,32}#[0-9]{4}$')
 
 // Schema //
@@ -33,8 +35,14 @@ interface Game {
 }
 
 export function CreateAdModal() {
+    const { userDiscord } = useUser()
+
     const methods = useForm<NewAdFormInputs>({
-        resolver: zodResolver(newAdFormSchema)
+        resolver: zodResolver(newAdFormSchema),
+        defaultValues: {
+            discord: `${userDiscord.username}#${userDiscord.discriminator}`,
+            username: userDiscord.username
+        }
     })
 
     const { formState: { errors, isValid, isSubmitting }, handleSubmit, register, reset } = methods
@@ -61,7 +69,9 @@ export function CreateAdModal() {
             }
 
             await axios.post(`http://localhost:8080/games/${gameSelected}/ads`, {
-                name: data.username,
+                username: data.username,
+                userId: userDiscord.id,
+                bannerUrl: userDiscord.avatar,
                 yearsPlaying: Number(data.yearsPlaying),
                 discord: data.discord,
                 weekDays: weekDays?.map(Number),
@@ -76,9 +86,6 @@ export function CreateAdModal() {
             alert("Erro ao criar o anúncio!")
         }
     }
-
-    // Variável auxiliar //
-    const isFormValid = !!weekDays && !!gameSelected && isValid
 
     return (
         <FormProvider {...methods}>
@@ -268,7 +275,7 @@ export function CreateAdModal() {
                                 {
                                     isSubmitting ? (
                                         <>
-                                            <Spinner size={20} className='animate-spin-slow'/>
+                                            <Spinner size={20} className='animate-spin-slow' />
                                         </>
                                     ) : (
                                         <>

@@ -1,8 +1,9 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Link } from 'react-router-dom'
 import { useUser } from './hooks/useUser'
 // Pages //
 import { Login } from './pages/Login'
 import { Home } from './pages/Home'
+import { Game } from './pages/Game'
 
 export function Router() {
     const { userDiscord } = useUser()
@@ -11,7 +12,10 @@ export function Router() {
         <Routes >
             {
                 userDiscord.id ? (
-                    <Route path='/' element={<Home />} />
+                    <Route>
+                        <Route path='/' element={<Home />} />
+                        <Route path='/games/:id/ads' element={<Game />} />
+                    </Route>
                 ) : (
                     <Route path='/' element={<Login />} />
                 )

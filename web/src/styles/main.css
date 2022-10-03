@@ -16,3 +16,18 @@ input::-webkit-inner-spin-button {
 * input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: ##18181B;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #9572FC 0%, #43E7AD 50.52%, #E2D45C 100%);
+    border-radius: 6px;
+}
