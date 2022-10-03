@@ -23,7 +23,9 @@ model Game {
 model Ads {
   id              String   @id @default(uuid())
   gameId          String
-  name            String
+  username        String
+  userId          String
+  bannerUrl       String
   yearsPlaying    Int
   discord         String
   weekDays        String

@@ -39,9 +39,6 @@ app.post('/games/:id/ads', async (request, response) => {
     const gameId = request.params.id
     const body = request.body
 
-    // Utils - Formatar Hora //
-    // Parei 1:29:35 - stage 3//
-
     const data = {
         gameId,
         ...body,
@@ -64,12 +61,14 @@ app.get('/games/:id/ads', async (request, response) => {
     const ads = await prisma.ads.findMany({
         select: {
             id: true,
-            name: true,
+            username: true,
+            userId: true,
             weekDays: true,
             useVoiceChannel: true,
             yearsPlaying: true,
             hourStart: true,
             hourEnd: true,
+            bannerUrl: true
         },
         where: {
             gameId
