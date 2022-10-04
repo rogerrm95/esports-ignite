@@ -8,7 +8,7 @@ import * as z from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm, FormProvider } from 'react-hook-form'
 // Icons //
-import { CaretDown, Check, GameController, Spinner } from 'phosphor-react'
+import { Check, GameController, Spinner } from 'phosphor-react'
 // Components //
 import { Input } from "../Form/Input"
 import { ErrorMessage } from '../ErrorMessage'

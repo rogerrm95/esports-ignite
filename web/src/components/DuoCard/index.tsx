@@ -1,10 +1,13 @@
 import { GameController } from "phosphor-react";
+import * as Dialog from '@radix-ui/react-dialog'
+import { UserDiscordModal } from "../Modal/UserDiscordModal";
+import { useState } from "react";
 
 interface DuoCardProps {
     id: string,
     bannerUrl: string,
     username: string,
-    userId: string | null,
+    userId: string,
     hourEnd: string,
     hourStart: string,
     useVoiceChannel: boolean,
@@ -18,6 +21,7 @@ interface Props {
 }
 
 export function DuoCard({ data }: Props) {
+    const [adSelectedId, setAdSelectedId] = useState('')
 
     return (
         <li className="w-[100%] h-[84px] flex justify-between items-center rounded-lg bg-[#2A2634] overflow-hidden pl-5">
@@ -28,7 +32,7 @@ export function DuoCard({ data }: Props) {
                 title="Foto de Perfil" />
 
             <div className="flex justify-between flex-1 px-4">
-                
+
                 <div className="flex flex-col text-sm">
                     <p className="text-zinc-400">Nome</p>
                     <span className="text-white font-semibold">{data.username}</span>
@@ -54,9 +58,16 @@ export function DuoCard({ data }: Props) {
                 </div>
             </div>
 
-            <button className="h-[100%] bg-violet-500 hover:bg-violet-600 flex items-center justify-center text-md text-white font-semibold gap-2 p-2">
-                <GameController size={28} weight='bold' />
-            </button>
+            {/* MODAL - DISCORD ID */}
+            <Dialog.Root>
+                <Dialog.Trigger onClick={() => setAdSelectedId(data.userId)}
+                    className="h-[100%] bg-violet-500 hover:bg-violet-600 flex items-center justify-center text-md text-white font-semibold gap-2 p-2">
+                    <GameController size={28} weight='bold' />
+                </Dialog.Trigger>
+                {
+                    adSelectedId && <UserDiscordModal discordId={adSelectedId} />
+                }
+            </Dialog.Root>
         </li>
     )
 }
