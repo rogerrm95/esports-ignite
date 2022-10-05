@@ -34,12 +34,12 @@ Mobile:
 
 # 🚧 E-Sports 2.0
 
-- Validação dos formulários (Web e Mobile);
+- Validação dos formulários (Web ✔ e Mobile);
 - Responsividade (Web) ✔;
 - Criar anúncio (Mobile);
 - Landing Page (Web);
-- Consumir dados do Discord (Web e Mobile);
-- Conectar com usuários (Web);
+- Consumir dados do Discord (Web ✔ e Mobile);
+- Conectar com usuários (Web) ✔;
 - Adicionar slider (Web) ✔;
 - Sistema de Login com o Discord (Web e Mobile) ✔.
 
