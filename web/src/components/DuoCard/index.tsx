@@ -60,7 +60,7 @@ export function DuoCard({ data }: Props) {
 
             {/* MODAL - DISCORD ID */}
             <Dialog.Root>
-                <Dialog.Trigger onClick={() => setAdSelectedId(data.userId)}
+                <Dialog.Trigger onClick={() => setAdSelectedId(data.id)}
                     className="h-[100%] bg-violet-500 hover:bg-violet-600 flex items-center justify-center text-md text-white font-semibold gap-2 p-2">
                     <GameController size={28} weight='bold' />
                 </Dialog.Trigger>
