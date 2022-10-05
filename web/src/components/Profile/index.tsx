@@ -6,7 +6,7 @@ export function Profile() {
 
     return (
         <div
-            className="self-end flex gap-2 p-2 items-center cursor-pointer mb-8 hover:bg-[#1d1a2496] rounded"
+            className="flex gap-2 p-2 items-center cursor-pointer hover:bg-[#1d1a2496] rounded"
             title="Perfil">
 
             <div className="flex flex-col items-end">

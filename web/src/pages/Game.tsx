@@ -6,6 +6,7 @@ import { Profile } from "../components/Profile";
 import { DuoCard } from "../components/DuoCard";
 // Images //
 import LogoESports from '../assets/logo-esports.svg'
+import { Header } from "../components/Header";
 
 type GameParams = {
     id: string,
@@ -45,8 +46,8 @@ export function Game() {
 
     return (
         <div className='max-w-[1344px] mx-auto flex flex-col items-center my-8 px-4'>
-            <Profile />
-
+            <Header/>
+            
             <img src={LogoESports} alt="E-Sports" />
 
             {/* ANÚNCIOS */}

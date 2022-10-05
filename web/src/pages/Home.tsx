@@ -10,7 +10,7 @@ import 'swiper/css/navigation';
 import { CreateAdBanner } from '../components/CreateAdBanner'
 import { GameCard } from '../components/GameCard'
 import { CreateAdModal } from '../components/Modal/CreateAdModal'
-import { Profile } from '../components/Profile'
+import { Header } from '../components/Header'
 // Imagens //
 import LogoESports from '../assets/logo-esports.svg'
 import { CaretLeft, CaretRight } from 'phosphor-react'
@@ -34,11 +34,15 @@ const breakPointsConfig = {
     },
     640: {
         slidesPerView: 3,
-        spaceBetween: 24
+        spaceBetween: 20
     },
     900: {
         slidesPerView: 4,
-        spaceBetween: 24
+        spaceBetween: 20
+    },
+    1100: {
+        slidesPerView: 5,
+        spaceBetween: 20
     }
 }
 
@@ -55,7 +59,7 @@ export function Home() {
 
     return (
         <div className='max-w-[1344px] mx-auto flex flex-col items-center my-8 px-4'>
-            <Profile />
+            <Header />
 
             <img src={LogoESports} alt="E-Sports" />
 

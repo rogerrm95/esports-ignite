@@ -24,33 +24,33 @@ export function DuoCard({ data }: Props) {
     const [adSelectedId, setAdSelectedId] = useState('')
 
     return (
-        <li className="w-[100%] h-[84px] flex justify-between items-center rounded-lg bg-[#2A2634] overflow-hidden pl-5">
+        <li className="w-[100%] h-[84px] pl-5 flex justify-between items-center rounded-lg bg-[#2A2634] hover:bg-[#2a263483] overflow-hidden">
             <img
                 className="w-12 h-12 rounded hidden md:block"
                 src={`https://cdn.discordapp.com/avatars/${data.userId}/${data.bannerUrl}`}
                 alt={data.username}
                 title="Foto de Perfil" />
-
+            
             <div className="flex justify-between flex-1 px-4">
 
-                <div className="flex flex-col text-sm">
+                <div className="flex flex-col text-xs w-[128px]">
                     <p className="text-zinc-400">Nome</p>
-                    <span className="text-white font-semibold">{data.username}</span>
+                    <span className="text-white font-semibold block truncate">{data.username}</span>
                 </div>
 
-                <div className="hidden md:flex md:flex-col md:items-center md:justify-center text-sm">
+                <div className="hidden md:flex md:flex-col md:items-center md:justify-center text-xs">
                     <p className="text-zinc-400">Tempo de jogo</p>
                     <span className="text-white ont-semibold">{data.yearsPlaying} ano(s)</span>
                 </div>
 
-                <div className="flex flex-col items-center justify-center text-sm text-center">
+                <div className="flex flex-col items-center justify-center text-xs text-center">
                     <p className="text-zinc-400">Disponibilidade</p>
                     <span className="text-white font-semibold">
                         {`${data.weekDays.length} dia(s) \u2022 ${data.hourStart} - ${data.hourEnd}`}
                     </span>
                 </div>
 
-                <div className="hidden sm:flex sm:flex-col sm:items-center sm:justify-center text-sm">
+                <div className="hidden sm:flex sm:flex-col sm:items-center sm:justify-center text-xs">
                     <p className="text-zinc-400">Chamada de áudio</p>
                     <span className={`text-white font-semibold ${data.useVoiceChannel ? 'text-[#10B981]' : 'text-[#EF4444]'}`}>
                         {data.useVoiceChannel ? 'Sim' : 'Não'}
