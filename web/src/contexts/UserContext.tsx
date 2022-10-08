@@ -15,19 +15,17 @@ export type UserDiscord = {
 interface UserContextData {
     userDiscord: UserDiscord,
     isLoading: boolean,
-    saveUserDataToStorage: (data: UserDiscord) => void,
-    removeUserToStorage: () => void,
     loginWithDiscord: () => Promise<void>,
+    signOut: () => void
 }
 
 export const UserContext = createContext<UserContextData>({} as UserContextData)
 
 export function UserContextProvider({ children }: UserContextProvider) {
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const [userDiscord, setUserDiscord] = useState({} as UserDiscord)
 
     useEffect(() => {
-        setIsLoading(true)
         const dataJSON = localStorage.getItem("@esports:discord-user")
 
         if (dataJSON) {
@@ -35,14 +33,12 @@ export function UserContextProvider({ children }: UserContextProvider) {
             setIsLoading(false)
             setUserDiscord(user)
         } else {
-            setIsLoading(false)
             setUserDiscord({} as UserDiscord)
         }
 
     }, [])
 
     function saveUserDataToStorage(data: UserDiscord) {
-        setUserDiscord(data)
         localStorage.setItem("@esports:discord-user", JSON.stringify(data))
     }
 
@@ -51,7 +47,6 @@ export function UserContextProvider({ children }: UserContextProvider) {
     }
 
     async function loginWithDiscord() {
-        setIsLoading(true)
         const fragment = new URLSearchParams(window.location.hash.slice(1));
 
         const accessToken = fragment.get('access_token')
@@ -70,14 +65,21 @@ export function UserContextProvider({ children }: UserContextProvider) {
                 }
             })
 
-            setIsLoading(false)
             saveUserDataToStorage(userData)
             setUserDiscord(userData)
+            setIsLoading(false)
+        } else {
+            setIsLoading(false)
         }
     }
 
+    function signOut() {
+        removeUserToStorage()
+        setUserDiscord({} as UserDiscord)
+    }
+
     return (
-        <UserContext.Provider value={{ userDiscord, isLoading, saveUserDataToStorage, removeUserToStorage, loginWithDiscord }}>
+        <UserContext.Provider value={{ userDiscord, isLoading, loginWithDiscord, signOut }}>
             {children}
         </UserContext.Provider>
     );

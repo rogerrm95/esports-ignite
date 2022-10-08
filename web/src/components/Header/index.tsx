@@ -13,7 +13,7 @@ export function Header() {
     }
 
     return (
-        <div className="w-[100%] flex p-2 items-center justify-between cursor-pointer mb-8">
+        <div className="w-[100%] flex p-2 items-center justify-between mb-8">
             {
                 pathname === '/' ? (
                     <div></div>

@@ -1,18 +1,27 @@
 // Imagens //
-import { DiscordLogo, Spinner } from 'phosphor-react'
 import { useEffect } from 'react'
-import LogoESports from '../assets/logo-esports.svg'
 import { useUser } from '../hooks/useUser'
+import { useNavigate } from 'react-router-dom'
+// Images //
+import { DiscordLogo, Spinner } from 'phosphor-react'
+import LogoESports from '../assets/logo-esports.svg'
 
 export function Login() {
-    const { isLoading, loginWithDiscord } = useUser()
+    const { isLoading, userDiscord, loginWithDiscord } = useUser()
+    const navigate = useNavigate()
 
     useEffect(() => {
-        loginWithDiscord()
+        async function loadDataAboutUser() {
+            await loginWithDiscord().then(() => {
+                navigate('/')
+            })
+        }
+
+        loadDataAboutUser()
     }, [])
 
-    function handleLoginDiscord() {
-        window.open(import.meta.env.VITE_DISCORD_URL_REDIRECT)
+    function handleLoginWithDiscord() {
+        window.open(import.meta.env.VITE_DISCORD_URL_REDIRECT, '_self')
     }
 
     return (
@@ -21,9 +30,9 @@ export function Login() {
 
             <div className='max-w-[500px] w-[100%] mx-auto mt-20 flex flex-col p-6 bg-[#2a2634bb] rounded-md shadow-2xl shadow-black'>
                 {
-                    isLoading ? (
+                    isLoading  ? (
                         <div className='flex flex-col items-center justify-center w-[100%] h-[304px] text-center'>
-                            <Spinner size={24} className='text-zinc-200 animate-spin-slow' weight='bold'/>
+                            <Spinner size={24} className='text-zinc-200 animate-spin-slow' weight='bold' />
                             <span className='text-zinc-200'>
                                 Carregando...
                             </span>
@@ -40,7 +49,7 @@ export function Login() {
 
                             <button
                                 className='flex items-center justify-center gap-2 my-6 bg-violet-500 hover:bg-violet-600 p-1 h-12 rounded-md'
-                                onClick={handleLoginDiscord}>
+                                onClick={handleLoginWithDiscord}>
                                 <DiscordLogo size={20} className='text-white' weight='bold' />
 
                                 <span className='text-white text-sm font-semibold'>

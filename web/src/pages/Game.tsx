@@ -64,7 +64,7 @@ export function Game() {
 
                 {/* LISTA DE ANÚNCIOS */}
                 <div className="flex flex-col gap-8 self-start w-[100%] h-[100%]">
-                    <h2 className='bg-nlw-gradient bg-clip-text text-transparent text-xl font-bold'>
+                    <h2 className='bg-clip-text text-white text-xl font-bold'>
                         Escontre seu duo e bora se conectar:
                     </h2>
 

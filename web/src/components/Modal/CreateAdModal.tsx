@@ -14,6 +14,7 @@ import { Input } from "../Form/Input"
 import { ErrorMessage } from '../ErrorMessage'
 import { Select } from '../Form/Select'
 import { useUser } from '../../hooks/useUser'
+import { useNavigate } from 'react-router-dom'
 
 // Regex //
 const discordRegex = new RegExp('^.{3,32}#[0-9]{4}$')
@@ -36,6 +37,7 @@ interface Game {
 
 export function CreateAdModal() {
     const { userDiscord } = useUser()
+    const nagivate = useNavigate()
 
     const methods = useForm<NewAdFormInputs>({
         resolver: zodResolver(newAdFormSchema),
@@ -45,7 +47,7 @@ export function CreateAdModal() {
         }
     })
 
-    const { formState: { errors, isValid, isSubmitting }, handleSubmit, register, reset } = methods
+    const { formState: { errors, isValid, isSubmitting, isSubmitted }, handleSubmit, reset } = methods
 
     const [games, setGames] = useState<Game[]>([])
     // Data //
@@ -79,11 +81,14 @@ export function CreateAdModal() {
                 hourEnd: data.hourEnd,
                 useVoiceChannel: hasUseVoiceChannel
             })
-
-            alert('Anuncio criado com sucesso')
-            reset()
+                .then(() => {
+                    reset()
+                    alert('Anuncio criado com sucesso')
+                })
         } catch (error) {
             alert("Erro ao criar o anúncio!")
+        } finally {
+            location.reload()
         }
     }
 
