@@ -27,6 +27,7 @@ export const THEME = {
   },
 
   FONT_SIZE: {
+    XXS: 10,
     XS: 12,
     SM: 14,
     MD: 16,
