@@ -7,19 +7,18 @@ import { styles } from './styles'
 
 interface CheckBoxProps extends PressableProps {
     label: string
-    value: boolean
     backgroundCheckbox?: ColorValue,
     iconColor?: ColorValue,
     textColor?: ColorValue,
     onValueChange: (initialValue: boolean) => void
 }
 
-export function CheckBox({ label, value = true, backgroundCheckbox = '#FFF', textColor = '#FFF', iconColor = '#000', onValueChange, ...rest }: CheckBoxProps) {
-    const [initialValue, setInitialValue] = useState(value)
+export function CheckBox({ label, backgroundCheckbox = '#FFF', textColor = '#FFF', iconColor = '#000', onValueChange, ...rest }: CheckBoxProps) {
+    const [initialValue, setInitialValue] = useState(false)
 
     function handleCheckedBox() {
+        onValueChange(!initialValue)
         setInitialValue(!initialValue)
-        onValueChange(initialValue)
     }
 
     return (
