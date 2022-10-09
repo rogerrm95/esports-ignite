@@ -16,6 +16,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
 
+  goBackButton: {
+    width: 24,
+    height: 24
+  },
+
   logo: {
 
   },

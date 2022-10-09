@@ -50,8 +50,8 @@ export function Game() {
             <SafeAreaView style={styles.container}>
                 {/* HEADER */}
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={handleGoBack}>
-                        <Entypo name='chevron-thin-left' color={THEME.COLORS.CAPTION_300} />
+                    <TouchableOpacity onPress={handleGoBack} style={styles.goBackButton}>
+                        <Entypo name='chevron-thin-left' color={THEME.COLORS.CAPTION_300} size={24}/>
                     </TouchableOpacity>
 
                     <Image source={LogoImg} style={styles.logo} />
