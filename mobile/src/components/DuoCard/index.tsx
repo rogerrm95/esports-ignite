@@ -8,7 +8,7 @@ import { THEME } from '../../theme';
 
 export interface DuoCardProps {
   id: string,
-  name: string,
+  username: string,
   hourEnd: string,
   hourStart: string,
   useVoiceChannel: boolean,
@@ -24,7 +24,7 @@ interface Props {
 export function DuoCard({ data, onConnect }: Props) {
   return (
     <View style={styles.container}>
-      <DuoInfo label='Nome' value={data.name} />
+      <DuoInfo label='Nome' value={data.username} />
 
       <DuoInfo label='Tempo de jogo' value={`${data.yearsPlaying} ano(s)`} />
 
