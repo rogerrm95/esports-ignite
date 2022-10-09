@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 import { UserContext } from '../../contexts/UserContext';
 import { Picker } from '@react-native-picker/picker';
-import InputTime from '@react-native-community/datetimepicker'
+import { timesOfDay } from '../../utils/timesOfDay';
 import api from '../../services/axios';
 // Icons & Images //
 import FontAwesome from '@expo/vector-icons/FontAwesome'
@@ -16,6 +16,8 @@ import { Background } from '../../components/Background';
 import { GameCard, GameCardData } from '../../components/GameCard';
 import { Heading } from '../../components/Heading';
 import { Profile } from '../../components/Profile';
+import { CheckBox } from '../../components/Form/CheckBox';
+import { DaysOfTheWeek } from '../../components/Form/DaysOfTheWeek';
 // Styles //
 import { styles } from './styles';
 import { THEME } from '../../theme';
@@ -36,6 +38,9 @@ export function Home() {
     const [games, setGames] = useState<Game[]>([])
     const [isModalOpen, setIsModalOpen] = useState(false)
 
+    const [weekDays, setWeekDays] = useState<string[]>([])
+    const [useVoiceChannel, setUseVoiceChannel] = useState(false)
+
     useEffect(() => {
         async function load() {
             await api.get('/games')
@@ -54,6 +59,15 @@ export function Home() {
 
     function handleToggleModal() {
         setIsModalOpen(!isModalOpen)
+    }
+
+    function handleSubmit() {
+        const data = {
+            useVoiceChannel,
+            weekDays
+        }
+
+        console.log(data)
     }
 
     return (
@@ -119,9 +133,13 @@ export function Home() {
                                             <Text style={styles.label}>Qual o game ?</Text>
 
                                             <View style={styles.select}>
-                                                <Picker style={{ color: THEME.COLORS.TEXT }} dropdownIconColor={THEME.COLORS.TEXT}>
-                                                    <Picker.Item label='Fifa 2023' value='Fifa 2023' />
-                                                    <Picker.Item label='Fortinite' value='Fortinite' />
+                                                <Picker style={{ color: THEME.COLORS.TEXT }} dropdownIconColor={THEME.COLORS.TEXT} numberOfLines={1}>
+                                                    <Picker.Item label='Selecione um jogo...' value='' enabled={false} />
+                                                    {
+                                                        games.map(game => (
+                                                            <Picker.Item label={game.title} value={game.title} key={game.id} />
+                                                        ))
+                                                    }
                                                 </Picker>
                                             </View>
                                         </View>
@@ -154,42 +172,64 @@ export function Home() {
 
                                         {/* DIAS DA SEMANA - INPUT */}
                                         <View>
-                                            <Text style={styles.label}>Discord</Text>
-                                            <TextInput style={styles.input}
-                                                placeholder='Usuario#0000'
-                                                placeholderTextColor={THEME.COLORS.CAPTION_500} />
+                                            <Text style={styles.label}>Quando costuma jogar?</Text>
+                                            <DaysOfTheWeek data={weekDays} onCheckedValue={(value) => setWeekDays(value)} />
                                         </View>
 
-                                        {/* HORÁRIOS - INPUTS */}
+                                        {/* HORÁRIOS - SELECTS */}
                                         <View>
                                             <Text style={styles.label}>Qual horário do dia?</Text>
 
-                                            {/* Continuar
                                             <View style={styles.inputGroup}>
-                                                <InputTime style={[styles.input, styles.inputDate]}
-                                                    keyboardType='numeric'
-                                                    textContentType='oneTimeCode'
-                                                    placeholder='De'
-                                                    placeholderTextColor={THEME.COLORS.CAPTION_500} />
+                                                <View style={styles.selectDate}>
+                                                    <Picker style={{ color: THEME.COLORS.TEXT, width: "100%" }} dropdownIconColor={THEME.COLORS.TEXT} numberOfLines={1}>
+                                                        <Picker.Item value='' label='De' style={{ color: THEME.COLORS.CAPTION_400 }} enabled={false} />
+                                                        {
+                                                            timesOfDay.map(time => (
+                                                                <Picker.Item value={time} label={time} key={time} />
+                                                            ))
+                                                        }
+                                                    </Picker>
+                                                </View>
 
-                                                <TextInput style={[styles.input, styles.inputDate]}
-                                                    placeholder='Até'
-                                                    placeholderTextColor={THEME.COLORS.CAPTION_500} />
-                                            </View> 
-                                            */}
+                                                <View style={styles.selectDate}>
+                                                    <Picker style={{ color: THEME.COLORS.TEXT }} dropdownIconColor={THEME.COLORS.TEXT} numberOfLines={1}>
+                                                        <Picker.Item value='' label='Até' style={{ color: THEME.COLORS.CAPTION_400 }} enabled={false} />
+                                                        {
+                                                            timesOfDay.map(time => (
+                                                                <Picker.Item value={time} label={time} key={time} />
+                                                            ))
+                                                        }
+                                                    </Picker>
+                                                </View>
+                                            </View>
                                         </View>
 
+                                        {/* CHAT DE VOZ - CHECKBOX */}
+                                        <View>
+                                            <CheckBox
+                                                style={styles.checkbox}
+                                                label='Costumo me conectar ao chat de voz'
+                                                backgroundCheckbox={THEME.COLORS.BACKGROUND_900}
+                                                iconColor={THEME.COLORS.SUCCESS}
+                                                onValueChange={(value) => setUseVoiceChannel(value)} />
+                                        </View>
                                     </View>
 
                                     {/* BOTÕES */}
-                                    <View>
-                                        <TouchableOpacity>
-                                            <Text>Cancelar</Text>
+                                    <View style={styles.buttons}>
+                                        <TouchableOpacity style={[styles.button, styles.cancelButton]} onPress={() => setIsModalOpen(false)}>
+                                            <Text style={styles.buttonText}>
+                                                Cancelar
+                                            </Text>
                                         </TouchableOpacity>
 
-                                        <TouchableOpacity>
-                                            <GameController size={14} color={THEME.COLORS.TEXT} />
-                                            <Text>Encontrar Duo</Text>
+                                        <TouchableOpacity style={[styles.button, styles.submitButton]} onPress={handleSubmit}>
+                                            <GameController size={16} color={THEME.COLORS.TEXT} style={{ marginRight: 8 }} />
+
+                                            <Text style={styles.buttonText}>
+                                                Encontrar Duo
+                                            </Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>

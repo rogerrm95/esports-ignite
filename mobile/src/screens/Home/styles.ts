@@ -127,13 +127,50 @@ export const styles = StyleSheet.create({
     width: '100%'
   },
 
-  inputDate: {
-    width: 150
+  selectDate: {
+    width: 150,
+    height: 50,
+    backgroundColor: THEME.COLORS.BACKGROUND_900,
+    marginBottom: 12,
+    paddingLeft: 8,
+    borderRadius: 8
   },
 
-  buttons: {},
+  checkbox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+    marginTop: 12,
+  },
 
-  cancelButton: {},
+  buttons: {
+    marginTop: 32,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
 
-  submitButton: {},
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 48,
+    padding: 12,
+    borderRadius: 8,
+  },
+
+  cancelButton: {
+    backgroundColor: THEME.COLORS.CAPTION_400,
+    marginRight: 16
+  },
+
+  submitButton: {
+    backgroundColor: THEME.COLORS.PRIMARY,
+  },
+
+  buttonText: {
+    color: THEME.COLORS.TEXT,
+    fontFamily: THEME.FONT_FAMILY.SEMI_BOLD,
+    fontSize: THEME.FONT_SIZE.SM
+  },
 });
