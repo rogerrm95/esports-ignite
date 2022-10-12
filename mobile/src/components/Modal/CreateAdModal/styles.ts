@@ -5,8 +5,6 @@ export const styles = StyleSheet.create({
     // CRIAR ANÚNCIO - MODAL //
     container: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
     },
 
     content: {
@@ -96,6 +94,11 @@ export const styles = StyleSheet.create({
 
     submitButton: {
         backgroundColor: THEME.COLORS.PRIMARY,
+    },
+
+    submitDisabledButton: {
+        backgroundColor: THEME.COLORS.CAPTION_500,
+        opacity: 0.5
     },
 
     buttonText: {

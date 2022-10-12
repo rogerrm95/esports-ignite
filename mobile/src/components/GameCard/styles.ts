@@ -6,6 +6,10 @@ export const styles = StyleSheet.create({
     marginRight: 24,
   },
 
+  containerDisabled: {
+    opacity: 0.5
+  },
+
   cover: {
     width: 240,
     height: 320,

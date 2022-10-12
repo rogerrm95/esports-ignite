@@ -1,23 +1,23 @@
 import { useState } from 'react'
-import { View, ModalProps, Modal, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, ModalProps, Modal, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useUser } from '../../../hooks/useUser'
 import api from '../../../services/axios';
 // SCHEMA //
 import { NewAdFormInputs, newAdFormSchema } from './schema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm, Controller,  } from 'react-hook-form'
+import { useForm, Controller, } from 'react-hook-form'
 // Icons //
 import { GameController } from 'phosphor-react-native';
 // Components //
 import { CheckBox } from '../../Form/CheckBox';
 import { DaysOfTheWeek } from '../../Form/DaysOfTheWeek';
+import { ErrorMessage } from '../../ErrorMessage';
 // Utils //
 import { timesOfDay } from '../../../utils/timesOfDay';
 // Styles //
 import { styles } from './styles';
 import { THEME } from '../../../theme';
-import { ErrorMessage } from '../../ErrorMessage';
 
 type Game = {
     id: string,
@@ -53,6 +53,7 @@ export function CreateAdModal({ games, onClose, ...rest }: CreateAdModalProps) {
     const [hourStart, setHourStart] = useState('')
     const [hourEnd, setHourEnd] = useState('')
 
+    // CADASTRAR UM NOVO ANÚNCIO //
     async function handleCreateNewAd(adData: NewAdFormInputs) {
         try {
 
@@ -81,9 +82,12 @@ export function CreateAdModal({ games, onClose, ...rest }: CreateAdModalProps) {
         }
     }
 
+    // Variáveis auxiliares //
+    const isTheFormCompleted = isValid && (!!gameSelected && !!weekDays && !!hourStart && !!hourEnd)
+
     return (
         <Modal {...rest}>
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <View style={styles.content}>
                     {/* TÍTULO */}
                     <Text style={styles.title}>
@@ -111,9 +115,9 @@ export function CreateAdModal({ games, onClose, ...rest }: CreateAdModalProps) {
                                         ))
                                     }
                                 </Picker>
-
-                                {(!gameSelected && isValid) && <ErrorMessage message='Selecione o jogo'/>}
                             </View>
+
+                            {(!gameSelected && isValid) && <ErrorMessage message='Selecione o jogo' />}
                         </View>
 
                         {/* NOME - INPUT */}
@@ -121,7 +125,6 @@ export function CreateAdModal({ games, onClose, ...rest }: CreateAdModalProps) {
                             <Text style={styles.label}>Seu nome (ou nickname)</Text>
                             <Controller
                                 name='username'
-                                rules={{ required: true }}
                                 control={control}
                                 render={({ field: { onBlur, onChange, value } }) => (
                                     <TextInput style={styles.input}
@@ -132,6 +135,8 @@ export function CreateAdModal({ games, onClose, ...rest }: CreateAdModalProps) {
                                         value={value} />
                                 )}
                             />
+
+                            {errors.username && <ErrorMessage message={errors.username.message} />}
                         </View>
 
                         {/* TEMPO DE JOGO - INPUT */}
@@ -152,6 +157,8 @@ export function CreateAdModal({ games, onClose, ...rest }: CreateAdModalProps) {
                                         placeholderTextColor={THEME.COLORS.CAPTION_500} />
                                 )}
                             />
+
+                            {errors.yearsPlaying && <ErrorMessage message={errors.yearsPlaying.message} />}
                         </View>
 
                         {/* DISCORD - INPUT */}
@@ -171,12 +178,16 @@ export function CreateAdModal({ games, onClose, ...rest }: CreateAdModalProps) {
                                         placeholderTextColor={THEME.COLORS.CAPTION_500} />
                                 )}
                             />
+
+                            {errors.discord && <ErrorMessage message={errors.discord.message} />}
                         </View>
 
                         {/* DIAS DA SEMANA - CHECKBOX GROUP */}
                         <View>
                             <Text style={styles.label}>Quando costuma jogar?</Text>
                             <DaysOfTheWeek data={weekDays} onCheckedValue={(value) => setWeekDays(value)} />
+
+                            {(weekDays.length === 0 && isValid) && <ErrorMessage message="Selecionar um dia da semana" />}
                         </View>
 
                         {/* HORÁRIOS - SELECTS */}
@@ -218,6 +229,8 @@ export function CreateAdModal({ games, onClose, ...rest }: CreateAdModalProps) {
                                     </Picker>
                                 </View>
                             </View>
+
+                            {(!hourEnd && !hourStart && isValid) && <ErrorMessage message="Selecionar um dia da semana" />}
                         </View>
 
                         {/* CHAT DE VOZ - CHECKBOX */}
@@ -239,7 +252,11 @@ export function CreateAdModal({ games, onClose, ...rest }: CreateAdModalProps) {
                             </Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={[styles.button, styles.submitButton]} onPress={handleSubmit(handleCreateNewAd)}>
+                        <TouchableOpacity
+                            disabled={!isTheFormCompleted}
+                            style={[styles.button, isTheFormCompleted ? styles.submitButton : styles.submitDisabledButton]}
+                            onPress={handleSubmit(handleCreateNewAd)}>
+
                             <GameController size={16} color={THEME.COLORS.TEXT} style={{ marginRight: 8 }} />
 
                             <Text style={styles.buttonText}>
@@ -248,7 +265,7 @@ export function CreateAdModal({ games, onClose, ...rest }: CreateAdModalProps) {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
+            </ScrollView>
         </Modal>
     );
 }

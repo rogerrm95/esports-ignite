@@ -18,8 +18,11 @@ interface GameCardProps extends TouchableOpacityProps {
 }
 
 export function GameCard({ data, ...rest }: GameCardProps) {
+    // Variável auxiliar //
+    const hasAdsRegistered = data._count.Ads === 0
+
     return (
-        <TouchableOpacity style={styles.container} {...rest}>
+        <TouchableOpacity style={[styles.container, hasAdsRegistered && styles.containerDisabled]} disabled={hasAdsRegistered} {...rest}>
             <ImageBackground style={styles.cover} source={{ uri: data.bannerUrl }}>
 
                 <LinearGradient colors={THEME.COLORS.FOOTER} style={styles.footer}>
