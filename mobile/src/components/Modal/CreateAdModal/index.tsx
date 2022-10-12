@@ -2,10 +2,11 @@ import { useState } from 'react'
 import { View, ModalProps, Modal, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useUser } from '../../../hooks/useUser'
+import api from '../../../services/axios';
 // SCHEMA //
 import { NewAdFormInputs, newAdFormSchema } from './schema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm, Controller,  } from 'react-hook-form'
 // Icons //
 import { GameController } from 'phosphor-react-native';
 // Components //
@@ -16,7 +17,7 @@ import { timesOfDay } from '../../../utils/timesOfDay';
 // Styles //
 import { styles } from './styles';
 import { THEME } from '../../../theme';
-import axios from 'axios';
+import { ErrorMessage } from '../../ErrorMessage';
 
 type Game = {
     id: string,
@@ -36,7 +37,7 @@ export function CreateAdModal({ games, onClose, ...rest }: CreateAdModalProps) {
     const { data } = useUser()
 
     // Registrar Inputs //
-    const { handleSubmit, reset, control, formState: { errors } } = useForm<NewAdFormInputs>({
+    const { handleSubmit, reset, control, formState: { errors, isValid } } = useForm<NewAdFormInputs>({
         resolver: zodResolver(newAdFormSchema),
         defaultValues: {
             discord: `${data.username}#${data.discriminator}`,
@@ -54,11 +55,12 @@ export function CreateAdModal({ games, onClose, ...rest }: CreateAdModalProps) {
 
     async function handleCreateNewAd(adData: NewAdFormInputs) {
         try {
+
             if (!gameSelected || !weekDays) {
                 return
             }
 
-            const ad = {
+            await api.post(`/games/${gameSelected}/ads`, {
                 username: adData.username,
                 userId: data.id,
                 bannerUrl: data.avatar,
@@ -68,16 +70,14 @@ export function CreateAdModal({ games, onClose, ...rest }: CreateAdModalProps) {
                 hourStart,
                 hourEnd,
                 useVoiceChannel: hasUseVoiceChannel,
-            }
+            }).then(() => {
+                reset()
+                onClose(false)
+                alert('Anuncio criado com sucesso')
+            })
 
-            await axios.post(`http://localhost:8080/games/${gameSelected}/ads`, ad)
-                .then(() => {
-                    reset()
-                    onClose(false)
-                    alert('Anuncio criado com sucesso')
-                })
         } catch (error) {
-            console.log(error)
+            alert('Erro ao criar anúncio')
         }
     }
 
@@ -111,6 +111,8 @@ export function CreateAdModal({ games, onClose, ...rest }: CreateAdModalProps) {
                                         ))
                                     }
                                 </Picker>
+
+                                {(!gameSelected && isValid) && <ErrorMessage message='Selecione o jogo'/>}
                             </View>
                         </View>
 

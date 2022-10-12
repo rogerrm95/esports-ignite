@@ -36,23 +36,26 @@ app.get('/games', async (request, response) => {
 })
 
 app.post('/games/:id/ads', async (request, response) => {
-    const gameId = request.params.id
-    const body = request.body
+    try {
+        const gameId = request.params.id
+        const body = request.body
 
-    const data = {
-        gameId,
-        ...body,
-        hourStart: convertHoursToMinutesAmount(body.hourStart),
-        hourEnd: convertHoursToMinutesAmount(body.hourEnd),
-        weekDays: body.weekDays.join(','),
+        const data = {
+            gameId,
+            ...body,
+            hourStart: convertHoursToMinutesAmount(body.hourStart),
+            hourEnd: convertHoursToMinutesAmount(body.hourEnd),
+            weekDays: body.weekDays.join(','),
+        }
+
+        const ad = await prisma.ads.create({
+            data
+        })
+        
+        return response.status(204).json(ad)
+    } catch (error) {
+        return response.status(500).json({message: error})
     }
-
-    const ad = await prisma.ads.create({
-        data
-    })
-
-
-    return response.status(204).json(ad)
 })
 
 app.get('/games/:id/ads', async (request, response) => {
