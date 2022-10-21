@@ -52,7 +52,10 @@ export function UserContextProvider({ children }: UserContextProvider) {
 
     async function removeUserToAsyncStorage() {
         setIsLoading(true)
-        await removeItem().then(_ => setIsLoading(false))
+        await removeItem().then(_ => {
+            setIsLoading(false)
+            setData({})
+        })
     }
 
     return (

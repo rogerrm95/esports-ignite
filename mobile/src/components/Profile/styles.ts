@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
   container: {
     alignSelf: 'flex-end',
     flexDirection: 'row',
+    alignItems: 'center'
   },
 
   userInfo: {
@@ -30,5 +31,6 @@ export const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 6,
+    marginRight: 8
   }
 });
