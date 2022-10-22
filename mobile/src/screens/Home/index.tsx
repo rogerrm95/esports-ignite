@@ -7,19 +7,16 @@ import api from '../../services/axios';
 // Icons & Images //
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import Entypo from '@expo/vector-icons/Entypo'
-import { GameController } from 'phosphor-react-native';
 import logoIMG from '../../assets/logo-nlw-esports.png'
 // Components //
 import { Background } from '../../components/Background';
 import { GameCard, GameCardData } from '../../components/GameCard';
 import { Heading } from '../../components/Heading';
 import { Profile } from '../../components/Profile';
-import { CheckBox } from '../../components/Form/CheckBox';
-import { DaysOfTheWeek } from '../../components/Form/DaysOfTheWeek';
+import { CreateAdModal } from '../../components/Modal/CreateAdModal';
 // Styles //
 import { styles } from './styles';
 import { THEME } from '../../theme';
-import { CreateAdModal } from '../../components/Modal/CreateAdModal';
 
 interface Game {
     id: string,
@@ -55,6 +52,24 @@ export function Home() {
 
     function handleToggleModal() {
         setIsModalOpen(!isModalOpen)
+    }
+
+    function handleCreateAd(adId: string) {
+
+        const newAdsCount = games.map(game => {
+            if (adId === game.id) {
+                return {
+                    ...game,
+                    _count: {
+                        Ads: game._count.Ads + 1
+                    }
+                }
+            } else {
+                return game
+            }
+        })
+
+        setGames(newAdsCount)
     }
 
     return (
@@ -108,9 +123,11 @@ export function Home() {
                         <CreateAdModal
                             transparent
                             games={games}
+                            visible={isModalOpen}
                             onRequestClose={() => setIsModalOpen(false)}
                             onClose={(modalStatus) => setIsModalOpen(modalStatus)}
-                            visible={isModalOpen} />
+                            onCreateAd={(adId) => handleCreateAd(adId)}
+                        />
                     </View>
                 </ScrollView>
             </SafeAreaView>

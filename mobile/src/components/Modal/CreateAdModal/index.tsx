@@ -30,10 +30,11 @@ type Game = {
 
 interface CreateAdModalProps extends ModalProps {
     games: Game[],
-    onClose: (modalStatus: boolean) => void
+    onClose: (modalStatus: boolean) => void,
+    onCreateAd: (ad: string) => void
 }
 
-export function CreateAdModal({ games, onClose, ...rest }: CreateAdModalProps) {
+export function CreateAdModal({ games, onClose, onCreateAd, ...rest }: CreateAdModalProps) {
     const { data } = useUser()
 
     // Registrar Inputs //
@@ -74,6 +75,7 @@ export function CreateAdModal({ games, onClose, ...rest }: CreateAdModalProps) {
             }).then(() => {
                 reset()
                 onClose(false)
+                onCreateAd(gameSelected)
                 alert('Anuncio criado com sucesso')
             })
 

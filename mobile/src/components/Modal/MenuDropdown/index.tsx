@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Modal, ModalProps, Text, TouchableOpacity, GestureResponderEvent } from 'react-native';
+import { Linking,View, Modal, ModalProps, Text, TouchableOpacity, GestureResponderEvent } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useUser } from '../../../hooks/useUser';
 // ICONS //
@@ -14,7 +14,6 @@ interface MenuDropdownProps extends ModalProps {
 
 export function MenuDropdown({ onPressOutModal, ...rest }: MenuDropdownProps) {
     const { removeUserToAsyncStorage } = useUser()
-    const { navigate } = useNavigation()
 
     function handlePressOutModal(event: GestureResponderEvent) {
         if (event.target === event.currentTarget) {
@@ -25,14 +24,18 @@ export function MenuDropdown({ onPressOutModal, ...rest }: MenuDropdownProps) {
 
     function handleSignOut() {
         removeUserToAsyncStorage()
-        navigate('login')
+        //navigate('login')
+    }
+
+    function handleRedirectToDiscord(){
+        Linking.openURL('https://discord.com/channels/@me')
     }
 
     return (
         <Modal {...rest}>
             <View style={styles.overlay} onTouchStart={handlePressOutModal}>
                 <View style={styles.container}>
-                    <TouchableOpacity style={styles.menuItem} activeOpacity={0.5}>
+                    <TouchableOpacity style={styles.menuItem} activeOpacity={0.5} onPress={handleRedirectToDiscord}>
                         <Text style={styles.menuText}>Discord</Text>
                         <DiscordLogo size={16} color={THEME.COLORS.TEXT} weight='bold' />
                     </TouchableOpacity>
