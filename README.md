@@ -16,12 +16,6 @@ Projeto desenvolvido durante o #NLW da Rocketseat - 2022.
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-Front-End:
-- [ReactJS](https://pt-br.reactjs.org/);
-- [Tailwind CSS](https://tailwindcss.com/);
-- [Typescript](https://www.typescriptlang.org/);
-- [Vite](https://vitejs.dev/).
-
 Back-End:
 - [NodeJS](https://nodejs.org/en/);
 - [ExpressJS](https://expressjs.com/pt-br/);
@@ -31,6 +25,20 @@ Back-End:
 Mobile:
 - [React Native](https://reactnative.dev/);
 - [Expo](https://docs.expo.dev/).
+
+Web: 
+- [Radix UI](https://www.radix-ui.com/);
+- [ReactJS](https://pt-br.reactjs.org/);
+- [React-Router](https://reactrouter.com/en/main);
+- [Swiper](https://swiperjs.com/);
+- [Tailwind CSS](https://tailwindcss.com/);
+- [Vite](https://vitejs.dev/).
+
+Web and Mobile:
+- [Context-API](https://reactjs.org/docs/context.html);
+- [React-Hook-Form](https://react-hook-form.com/);
+- [Typescript](https://www.typescriptlang.org/);
+- [Yup](https://github.com/jquense/yup).
 
 # 🚧 E-Sports 2.0
 
