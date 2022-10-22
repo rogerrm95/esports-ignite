@@ -10,11 +10,11 @@ const { Navigator, Screen } = createNativeStackNavigator()
 
 export function AppRoutes() {
     const { data } = useContext(UserContext)
-    
+
     return (
         <Navigator screenOptions={{ headerShown: false }}>
             {
-                data ? (
+                data.username ? (
                     <Screen name='home' component={Home} />
                 ) : (
                     <Screen name='login' component={Login} />

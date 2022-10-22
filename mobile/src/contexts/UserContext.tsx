@@ -24,7 +24,7 @@ export const UserContext = createContext<UserContextData>({} as UserContextData)
 export function UserContextProvider({ children }: UserContextProvider) {
     const { getItem, setItem, removeItem } = useAsyncStorage("@esports:discord-user")
 
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const [data, setData] = useState<User>({} as User)
 
     useEffect(() => {
@@ -53,9 +53,10 @@ export function UserContextProvider({ children }: UserContextProvider) {
     async function removeUserToAsyncStorage() {
         setIsLoading(true)
         await removeItem().then(_ => {
-            setIsLoading(false)
-            setData({})
+            setData({} as User)
         })
+
+        setIsLoading(false)
     }
 
     return (
