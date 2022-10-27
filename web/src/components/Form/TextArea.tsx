@@ -16,7 +16,7 @@ interface TextAreaFieldProps extends HTMLAttributes<HTMLTextAreaElement> { }
 
 function TextAreaField({ ...rest }: TextAreaFieldProps) {
     return (
-        <textarea className="bg-zinc-900 text-white placeholder:text-zinc-500 p-3 leading-relaxed h-[160px] rounded outline-none"  {...rest} />
+        <textarea className="resize-none bg-zinc-900 text-white placeholder:text-zinc-500 p-3 leading-relaxed h-[160px] rounded outline-none"  {...rest} />
     )
 }
 
@@ -26,7 +26,7 @@ interface TextAreaLabelProps extends HTMLAttributes<HTMLLabelElement> {
 
 function TextAreaLabel({ children, ...rest }: TextAreaLabelProps) {
     return (
-        <label className="text-zinc-300 font-semibold" {...rest}>
+        <label className="text-zinc-300 font-semibold flex justify-between" {...rest}>
             {
                 children
             }

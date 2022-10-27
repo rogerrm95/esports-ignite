@@ -1,7 +1,9 @@
 // Components //
 import { DetailsCard } from '../components/Card/DetailsCard'
+import { Input } from '../components/Form/Input'
+import { TextArea } from '../components/Form/TextArea'
 // Images & Icons //
-import { SignIn, WarningOctagon } from 'phosphor-react'
+import { Envelope, SignIn, WarningOctagon } from 'phosphor-react'
 import ControllerImage from '../assets/icons/controller.png'
 import ClockImage from '../assets/icons/clock.png'
 import DiscordImage from '../assets/icons/discord.png'
@@ -14,8 +16,33 @@ import IoSImage from '../assets/icons/ios.png'
 import QuestionsIcon from '../assets/icons/questions.png'
 import TipIcon from '../assets/icons/tip.png'
 import SuportIcon from '../assets/icons/suport-woman.png'
+import GradientGithub from '../assets/icons/gradient-github.png'
+import GradientLinkedin from '../assets/icons/gradient-linkedin.png'
+// Validation //
+import * as z from 'zod'
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm, FormProvider } from 'react-hook-form'
+import { Select } from '../components/Form/Select'
+// Utils //
+import { typeOfContact } from '../utils/typeOfContact'
+
+const messageUserSchema = z.object({
+    name: z.string().min(2, { message: "Digitar ao menos 2 letras" }),
+    email: z.string().email({ message: "Por favor, informar um e-mail válido!" }),
+    type: z.enum(['question', 'suggestion', 'complaint', 'support']),
+    message: z.string().min(10, { message: 'Quantidae mínima de caracteres: 10' })
+})
+
+type MessageUserSchemaProps = z.infer<typeof messageUserSchema>
 
 export function Landing() {
+
+    const methods = useForm<MessageUserSchemaProps>({
+        resolver: zodResolver(messageUserSchema)
+    })
+
+    const { formState: { errors, isValid, isSubmitting, isSubmitted }, handleSubmit, reset } = methods
+
     return (
         <div className="h-screen flex flex-col relative">
             <header className="flex justify-between items-center py-8 px-4 shadow-lg bg-[#221e2c80] w-full sticky top-0">
@@ -165,9 +192,7 @@ export function Landing() {
                 </section>
 
                 {/* FALE CONOSCO */}
-                <section id='contact'>
-                    {/* FORMULARIOS... */}
-
+                <section className='flex flex-col lg:flex-row' id='contact'>
                     {/* BANNER */}
                     <div className='h-[979px] flex flex-col items-center justify-center gap-[96px] bg-holo bg-cover bg-no-repeat pt-8 px-4 '>
                         <img src={LogoESports} className='w-[400px]' alt="Logo E-Sports" />
@@ -190,15 +215,98 @@ export function Landing() {
                                 image={SuportIcon} />
                         </div>
                     </div>
+
+                    {/* FORMULARIOS... */}
+                    <div className='flex flex-col gap-6 p-6'>
+                        <h2 className='bg-nlw-gradient bg-clip-text text-transparent font-semibold text-4xl text-center font-landing-page leading-relaxed'>
+                            Fale Conosco
+                        </h2>
+
+                        <p className='text-zinc-300 text-justify leading-relaxed w-[75%]'>
+                            Caso queira nos contactar,
+                            por favor preencha o formulário abaixo que entraremos em contato atraves do e-mail enviado.
+                        </p>
+
+                        <FormProvider {...methods}>
+                            <form className='flex flex-col gap-4'>
+                                <div className='flex flex-col gap-2 text-zinc-500'>
+                                    <label htmlFor="name">Nome completo</label>
+                                    <Input
+                                        id='name'
+                                        placeholder='Seu nome completo...'
+                                        registerName='name'
+                                        name='name'
+                                    />
+                                    {/* {errors.username && <ErrorMessage message={errors.username.message} />} */}
+                                </div>
+
+                                <div className='flex flex-col gap-2 text-zinc-500'>
+                                    <label htmlFor="email">E-mail</label>
+                                    <Input
+                                        id='email'
+                                        placeholder='johndoe@example.com.br'
+                                        registerName='email'
+                                        name='email'
+                                        type='email'
+                                    />
+                                    {/* {errors.username && <ErrorMessage message={errors.username.message} />} */}
+                                </div>
+
+                                <div className='flex flex-col gap-2 text-zinc-500'>
+                                    <label htmlFor="email">Motivo do contato</label>
+                                    <Select
+                                        label='Selecionar uma categoria'
+                                        options={typeOfContact}
+                                        placeholder='Selecionar uma categoria...'
+                                        name='type'
+                                        onSelectedChange={() => { }}
+                                    />
+                                </div>
+
+                                <TextArea.Root>
+                                    <TextArea.Label>
+                                        Mensagem
+
+                                        <span className='text-xs font-normal text-zinc-500 mt-auto'>
+                                            Caracteres: 500
+                                        </span>
+                                    </TextArea.Label>
+
+                                    <TextArea.Field placeholder='Conte-nos o motivo da sua mensagem aqui ...' />
+                                </TextArea.Root>
+                            </form>
+
+                            <button className='bg-violet-500 hover:bg-violet-600 transition-colors text-white font-semibold flex items-center justify-center gap-3 px-3 py-5 rounded'>
+                                <Envelope size={24} />
+                                Enviar
+                            </button>
+                        </FormProvider>
+                    </div>
                 </section>
             </main>
 
-            <footer className='flex-1 h-[900px] p-1 flex flex-col'>
-                <div>Footer</div>
-                <div>Footer</div>
-                <div>Footer</div>
-                <div>Footer</div>
-                <div>Footer</div>
+            {/* FOOTER */}
+            <footer className='max-w-[1440px] w-full mx-auto flex justify-between items-center bg-footer-bg p-6'>
+                <span className='text-white text-[10px] text-center font-bold select-none'>
+                    Desenvolvido com <strong className='text-red-500'>❤</strong> por
+                    <br /> Rogério Marques
+                </span>
+
+                <div className='flex gap-5 items-center'>
+                    <a className='flex flex-col gap-2 items-center cursor-pointer hover:opacity-75 transition-opacity' href='https://github.com/rogerrm95'>
+                        <img src={GradientGithub} className='w-8 h-8' alt="Github" title='Github' />
+                        <span className='text-xs text-white font-semibold'>GitHub</span>
+                    </a>
+
+                    <a className='flex flex-col gap-2 items-center cursor-pointer' href='https://www.linkedin.com/in/rogeriomarquesfernandes/'>
+                        <img src={GradientLinkedin}  className='w-8 h-8' alt="Linkedin" title='Linkedin' />
+                        <span className='text-xs text-white font-semibold'>Linkedin</span>
+                    </a>
+                </div>
+
+                <span className='text-white text-[10px] text-right'>
+                    © Copyright - 2022
+                </span>
             </footer>
         </div >
     )
