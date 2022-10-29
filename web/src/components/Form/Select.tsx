@@ -3,13 +3,13 @@ import * as SelectUI from '@radix-ui/react-select'
 import { CaretDown, Check, GameController } from 'phosphor-react'
 import { ReactNode } from 'react'
 
-type Options = {
+export type OptionsType = {
     key: string,
     value: string,
 }
 
 interface SelectProps extends SelectUI.SelectTriggerProps {
-    options: Options[],
+    options: OptionsType[],
     label: string,
     placeholder: string,
     name: string,
@@ -22,7 +22,7 @@ export function Select({ options, label, placeholder, icon = undefined, name, on
         <SelectUI.Root onValueChange={(option) => onSelectedChange(option)}>
             <SelectUI.Trigger
                 aria-label={label}
-                className='inline-flex items-center justify-between bg-zinc-900 py-3 px-4 rounded text-zinc-500 text-sm'
+                className='inline-flex items-center justify-between bg-zinc-900 py-3 px-4 rounded text-zinc-600 text-sm'
                 {...rest}>
                 <SelectUI.Value placeholder={placeholder} />
                 <SelectUI.Icon>

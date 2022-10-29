@@ -18,30 +18,10 @@ import TipIcon from '../assets/icons/tip.png'
 import SuportIcon from '../assets/icons/suport-woman.png'
 import GradientGithub from '../assets/icons/gradient-github.png'
 import GradientLinkedin from '../assets/icons/gradient-linkedin.png'
-// Validation //
-import * as z from 'zod'
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm, FormProvider } from 'react-hook-form'
-import { Select } from '../components/Form/Select'
-// Utils //
-import { typeOfContact } from '../utils/typeOfContact'
+import { ContactUsForm } from '../components/Form/ContactUsForm'
 
-const messageUserSchema = z.object({
-    name: z.string().min(2, { message: "Digitar ao menos 2 letras" }),
-    email: z.string().email({ message: "Por favor, informar um e-mail válido!" }),
-    type: z.enum(['question', 'suggestion', 'complaint', 'support']),
-    message: z.string().min(10, { message: 'Quantidae mínima de caracteres: 10' })
-})
-
-type MessageUserSchemaProps = z.infer<typeof messageUserSchema>
 
 export function Landing() {
-
-    const methods = useForm<MessageUserSchemaProps>({
-        resolver: zodResolver(messageUserSchema)
-    })
-
-    const { formState: { errors, isValid, isSubmitting, isSubmitted }, handleSubmit, reset } = methods
 
     return (
         <div className="h-screen flex flex-col relative">
@@ -217,71 +197,7 @@ export function Landing() {
                     </div>
 
                     {/* FORMULARIOS... */}
-                    <div className='flex flex-col gap-6 p-6'>
-                        <h2 className='bg-nlw-gradient bg-clip-text text-transparent font-semibold text-4xl text-center font-landing-page leading-relaxed'>
-                            Fale Conosco
-                        </h2>
-
-                        <p className='text-zinc-300 text-justify leading-relaxed w-[75%]'>
-                            Caso queira nos contactar,
-                            por favor preencha o formulário abaixo que entraremos em contato atraves do e-mail enviado.
-                        </p>
-
-                        <FormProvider {...methods}>
-                            <form className='flex flex-col gap-4'>
-                                <div className='flex flex-col gap-2 text-zinc-500'>
-                                    <label htmlFor="name">Nome completo</label>
-                                    <Input
-                                        id='name'
-                                        placeholder='Seu nome completo...'
-                                        registerName='name'
-                                        name='name'
-                                    />
-                                    {/* {errors.username && <ErrorMessage message={errors.username.message} />} */}
-                                </div>
-
-                                <div className='flex flex-col gap-2 text-zinc-500'>
-                                    <label htmlFor="email">E-mail</label>
-                                    <Input
-                                        id='email'
-                                        placeholder='johndoe@example.com.br'
-                                        registerName='email'
-                                        name='email'
-                                        type='email'
-                                    />
-                                    {/* {errors.username && <ErrorMessage message={errors.username.message} />} */}
-                                </div>
-
-                                <div className='flex flex-col gap-2 text-zinc-500'>
-                                    <label htmlFor="email">Motivo do contato</label>
-                                    <Select
-                                        label='Selecionar uma categoria'
-                                        options={typeOfContact}
-                                        placeholder='Selecionar uma categoria...'
-                                        name='type'
-                                        onSelectedChange={() => { }}
-                                    />
-                                </div>
-
-                                <TextArea.Root>
-                                    <TextArea.Label>
-                                        Mensagem
-
-                                        <span className='text-xs font-normal text-zinc-500 mt-auto'>
-                                            Caracteres: 500
-                                        </span>
-                                    </TextArea.Label>
-
-                                    <TextArea.Field placeholder='Conte-nos o motivo da sua mensagem aqui ...' />
-                                </TextArea.Root>
-                            </form>
-
-                            <button className='bg-violet-500 hover:bg-violet-600 transition-colors text-white font-semibold flex items-center justify-center gap-3 px-3 py-5 rounded'>
-                                <Envelope size={24} />
-                                Enviar
-                            </button>
-                        </FormProvider>
-                    </div>
+                    <ContactUsForm />
                 </section>
             </main>
 
@@ -299,7 +215,7 @@ export function Landing() {
                     </a>
 
                     <a className='flex flex-col gap-2 items-center cursor-pointer' href='https://www.linkedin.com/in/rogeriomarquesfernandes/'>
-                        <img src={GradientLinkedin}  className='w-8 h-8' alt="Linkedin" title='Linkedin' />
+                        <img src={GradientLinkedin} className='w-8 h-8' alt="Linkedin" title='Linkedin' />
                         <span className='text-xs text-white font-semibold'>Linkedin</span>
                     </a>
                 </div>

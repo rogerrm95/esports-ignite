@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useUser } from '../../hooks/useUser'
 import axios from 'axios'
 import * as Dialog from '@radix-ui/react-dialog'
 import * as CheckBox from '@radix-ui/react-checkbox'
@@ -12,9 +13,7 @@ import { Check, GameController, Spinner } from 'phosphor-react'
 // Components //
 import { Input } from "../Form/Input"
 import { ErrorMessage } from '../ErrorMessage'
-import { Select } from '../Form/Select'
-import { useUser } from '../../hooks/useUser'
-import { useNavigate } from 'react-router-dom'
+import { OptionsType, Select } from '../Form/Select'
 
 // Regex //
 const discordRegex = new RegExp('^.{3,32}#[0-9]{4}$')
@@ -37,7 +36,6 @@ interface Game {
 
 export function CreateAdModal() {
     const { userDiscord } = useUser()
-    const nagivate = useNavigate()
 
     const methods = useForm<NewAdFormInputs>({
         resolver: zodResolver(newAdFormSchema),
@@ -47,10 +45,10 @@ export function CreateAdModal() {
         }
     })
 
-    const { formState: { errors, isValid, isSubmitting, isSubmitted }, handleSubmit, reset } = methods
+    const { formState: { errors, isValid, isSubmitting, isSubmitted }, register, handleSubmit, reset } = methods
 
-    const [games, setGames] = useState<Game[]>([])
     // Data //
+    const [gameOptions, setGameOptions] = useState<OptionsType[]>([])
     const [weekDays, setWeekDays] = useState<string[]>()
     const [hasUseVoiceChannel, setHasUseVoiceChannel] = useState(false)
     const [gameSelected, setGameSelected] = useState('')
@@ -58,7 +56,16 @@ export function CreateAdModal() {
     // API - Carregar os jogos do Back-End //
     useEffect(() => {
         axios.get('http://localhost:8080/games').then(res => {
-            setGames(res.data)
+            const data = res.data as Game[]
+
+            const optionsSelect = data.map(option => {
+                return {
+                    key: option.id,
+                    value: option.title
+                }
+            }) as OptionsType[]
+
+            setGameOptions(optionsSelect)
         })
     }, [])
 
@@ -94,7 +101,7 @@ export function CreateAdModal() {
 
     return (
         <FormProvider {...methods}>
-            < Dialog.Portal>
+            <Dialog.Portal>
                 <Dialog.Overlay className='bg-black/60 inset-0 fixed' />
 
                 <Dialog.Content className='fixed bg-[#2a2634] py-8 px-10 shadow-lg shadow-black/25 text-white rounded-lg top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px]'>
@@ -108,7 +115,7 @@ export function CreateAdModal() {
                             <label htmlFor="game" className='font-semibold'>Qual o game?</label>
                             <Select
                                 label='Games'
-                                options={games}
+                                options={gameOptions}
                                 onSelectedChange={(option) => setGameSelected(option)}
                                 placeholder='Selecione o game que deseja jogar...'
                                 name='game'
@@ -117,43 +124,47 @@ export function CreateAdModal() {
                         </div>
 
                         {/* USUÁRIO */}
-                        <div className='flex flex-col gap-2'>
-                            <label htmlFor="username">Seu nome (ou nickname)</label>
-                            <Input
+                        <Input.Root>
+                            <Input.Label>Seu nome (ou nickname)</Input.Label>
+
+                            <Input.Field
                                 id='username'
                                 placeholder='Como te chamam dentro do game?'
-                                registerName='username'
                                 name='username'
                             />
+
                             {errors.username && <ErrorMessage message={errors.username.message} />}
-                        </div>
+                        </Input.Root>
 
                         <div className='grid grid-cols-2 gap-6'>
                             {/* ANOS JOGANDO */}
-                            <div className='flex flex-col gap-2'>
-                                <label htmlFor="yearsPlaying">Joga há quantos anos?</label>
-                                <Input
+                            <Input.Root>
+                                <Input.Label>Joga há quantos anos?</Input.Label>
+
+                                <Input.Field
                                     id='yearsPlaying'
                                     placeholder='Tudo bem ser ZERO'
                                     type='number'
                                     min="0"
                                     max="99"
                                     name='yearsPlaying'
-                                    registerName='yearsPlaying'
                                 />
+
                                 {errors.yearsPlaying && <ErrorMessage message={errors.yearsPlaying.message} />}
-                            </div>
+                            </Input.Root>
 
                             {/* DISCORD */}
-                            <div className='flex flex-col gap-2'>
-                                <label htmlFor="discord">Qual seu discord?</label>
-                                <Input
-                                    type='text'
-                                    placeholder='Usuário#0000'
+                            <Input.Root>
+                                <Input.Label>Qual seu discord?</Input.Label>
+
+                                <Input.Field
                                     id='discord'
-                                    registerName='discord' />
-                                {errors.discord && <ErrorMessage message={errors.discord.message} />}
-                            </div>
+                                    placeholder='Usuário#0000'
+                                    name='discord'
+                                />
+
+                                {errors.yearsPlaying && <ErrorMessage message={errors.yearsPlaying.message} />}
+                            </Input.Root>
                         </div>
 
                         <div className='flex gap-6'>
@@ -225,28 +236,30 @@ export function CreateAdModal() {
                             </div>
 
                             {/* HORÁRIOS */}
-                            <div className='flex flex-col gap-2 flex-1'>
-                                <label htmlFor="hourStart">Qual horário do dia?</label>
+                            <Input.Root>
+                                <Input.Label>Qual horário do dia?</Input.Label>
 
                                 <div className='grid grid-cols-2 gap-2'>
-                                    <Input
+                                    <Input.Field
                                         type='time'
                                         id='hourStart'
                                         placeholder='De'
-                                        registerName='hourStart' />
+                                        name='hourStart'
+                                    />
 
-                                    <Input
+                                    <Input.Field
                                         type='time'
                                         id='hourEnd'
                                         placeholder='Até'
-                                        registerName='hourEnd' />
+                                        name="hourEnd"
+                                    />
                                 </div>
 
                                 {
                                     (errors.hourStart || errors.hourEnd) && <ErrorMessage message={"Informar os horários"} />
                                 }
 
-                            </div>
+                            </Input.Root>
                         </div>
 
                         {/* CHAT DE VOZ ? */}
@@ -267,8 +280,7 @@ export function CreateAdModal() {
 
                         {/* GRUPO DE BOTÕES */}
                         <footer className='mt-4 flex justify-end gap-4'>
-                            <Dialog.Close
-                                className='bg-zinc-500 hover:bg-zinc-600 px-5 h-12 rounded-md font-semibold'>
+                            <Dialog.Close className='bg-zinc-500 hover:bg-zinc-600 px-5 h-12 rounded-md font-semibold'>
                                 Cancelar
                             </Dialog.Close>
 
@@ -295,5 +307,6 @@ export function CreateAdModal() {
                 </Dialog.Content>
             </Dialog.Portal >
         </FormProvider>
+
     )
 }

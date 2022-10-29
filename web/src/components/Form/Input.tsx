@@ -1,26 +1,56 @@
-import { Fragment, InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, LabelHTMLAttributes, ReactNode } from "react";
 import { useFormContext } from 'react-hook-form'
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-    registerName?: string | undefined
+interface InputRootProps {
+    children: ReactNode
 }
 
-export function Input({ registerName = undefined, ...rest }: InputProps) {
-    const { register } = useFormContext()
+interface InputLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
+    children: ReactNode
+}
+
+interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+    name: string
+}
+
+function InputRoot({ children, ...rest }: InputRootProps) {
     return (
-        <Fragment>
+        <div className="flex flex-col gap-2" {...rest}>
             {
-                registerName ? (
-                    <input
-                        className='bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500'
-                        {...register(registerName)}
-                        {...rest} />
-                ) : (
-                    <input
-                        className='bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500'
-                        {...rest} />
-                )
+                children
             }
-        </Fragment>
+        </div>
     )
 }
+
+function InputLabel({ children, ...rest }: InputLabelProps) {
+    return (
+        <label className="text-zinc-300 font-semibold flex justify-between" {...rest}>
+            {
+                children
+            }
+        </label>
+    )
+}
+
+function InputField({ name, ...rest }: InputFieldProps) {
+    const { register } = useFormContext()
+
+    return (
+        <input
+            className='bg-zinc-900 py-3 px-4 rounded placeholder:text-zinc-600 text-zinc-300 text-sm font-semibold'
+            {...register(name)}
+            {...rest} />
+    )
+}
+
+InputRoot.displayName = "Input.Root"
+InputLabel.displayName = "Input.Label"
+InputField.displayName = "Input.Field"
+
+export const Input = {
+    Root: InputRoot,
+    Label: InputLabel,
+    Field: InputField
+}
+

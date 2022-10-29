@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode } from "react"
+import { LabelHTMLAttributes, ReactNode, TextareaHTMLAttributes } from "react"
 
 interface TextAreaRootProps {
     children: ReactNode
@@ -12,15 +12,15 @@ function TextAreaRoot({ children }: TextAreaRootProps) {
     )
 }
 
-interface TextAreaFieldProps extends HTMLAttributes<HTMLTextAreaElement> { }
+interface TextAreaFieldProps extends TextareaHTMLAttributes<HTMLTextAreaElement> { }
 
 function TextAreaField({ ...rest }: TextAreaFieldProps) {
     return (
-        <textarea className="resize-none bg-zinc-900 text-white placeholder:text-zinc-500 p-3 leading-relaxed h-[160px] rounded outline-none"  {...rest} />
+        <textarea className="resize-none bg-zinc-900 text-white text-sm placeholder:text-zinc-600 p-3 leading-relaxed h-[160px] rounded outline-none"  {...rest} />
     )
 }
 
-interface TextAreaLabelProps extends HTMLAttributes<HTMLLabelElement> {
+interface TextAreaLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
     children: ReactNode
 }
 
