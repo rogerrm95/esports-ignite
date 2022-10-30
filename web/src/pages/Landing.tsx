@@ -1,9 +1,10 @@
 // Components //
 import { DetailsCard } from '../components/Card/DetailsCard'
-import { Input } from '../components/Form/Input'
-import { TextArea } from '../components/Form/TextArea'
+import { ContactUsForm } from '../components/Form/ContactUsForm'
+import { NavBarLanding as Header } from '../components/NavBarLanding'
+import { ScrollToTopButton } from '../components/Buttons/ScrollToTopButton'
 // Images & Icons //
-import { Envelope, SignIn, WarningOctagon } from 'phosphor-react'
+import { ArrowUp, WarningOctagon } from 'phosphor-react'
 import ControllerImage from '../assets/icons/controller.png'
 import ClockImage from '../assets/icons/clock.png'
 import DiscordImage from '../assets/icons/discord.png'
@@ -18,33 +19,15 @@ import TipIcon from '../assets/icons/tip.png'
 import SuportIcon from '../assets/icons/suport-woman.png'
 import GradientGithub from '../assets/icons/gradient-github.png'
 import GradientLinkedin from '../assets/icons/gradient-linkedin.png'
-import { ContactUsForm } from '../components/Form/ContactUsForm'
-
 
 export function Landing() {
-
     return (
         <div className="h-screen flex flex-col relative">
-            <header className="flex justify-between items-center py-8 px-4 shadow-lg bg-[#221e2c80] w-full sticky top-0">
-                <img src={LogoESports} alt="Logo E-Sports" className='w-[96px] h-auto' />
-
-                <nav className='flex gap-8 items-center justify-center'>
-                    {/* <a href="#home" className='bg-nlw-gradient bg-clip-text text-transparent font-landing-page font-bold text-base'>Home</a> */}
-                    <a href="#home" className='font-landing-page text-white text-lg'>Home</a>
-                    <a href="#about" className='font-landing-page text-white text-lg'>Sobre</a>
-                    <a href="#app" className='font-landing-page text-white text-lg'>Aplicativo</a>
-                    <a href="#contact" className='font-landing-page text-white text-lg'>Fale conosco</a>
-                </nav>
-
-                <button className='h-10 py-2 px-3 flex gap-3 items-center justify-center bg-violet-500 rounded-md hover:bg-violet-600 transition-colors'>
-                    <span className='text-white text-xs'>Acessar</span>
-                    <SignIn size={20} color='#FFF' weight='bold' />
-                </button>
-            </header>
+            <Header />
 
             <main className='max-w-[1440px] w-full mx-auto flex flex-col'>
                 {/* LANDING PAGE */}
-                <section className='h-[979px]  flex items-center justify-center lg:justify-between px-6 flex-col lg:flex-row' id='home'>
+                <section id='home' className='h-[979px] flex items-center justify-center lg:justify-between px-6 flex-col lg:flex-row'>
                     <div className='flex flex-col gap-2 max-w-[600px]'>
                         <h1 className='text-[32px] font-bold text-white'>A plataforma digital perfeita para encontrar seu
                             <strong className='bg-nlw-gradient bg-clip-text text-transparent'> Duo.</strong>
@@ -67,7 +50,7 @@ export function Landing() {
                 </section>
 
                 {/* SOBRE */}
-                <section className='flex flex-col lg:flex-row-reverse' id='about'>
+                <section id='about' className='flex flex-col lg:flex-row-reverse'>
                     {/* ARTIGO */}
                     <div className='h-[979px] flex flex-col gap-6 p-6'>
                         <h2 className='bg-nlw-gradient bg-clip-text text-transparent font-semibold text-4xl text-center font-landing-page leading-relaxed'>
@@ -128,7 +111,7 @@ export function Landing() {
                 </section>
 
                 {/* APLICATIVO */}
-                <section className='flex flex-col lg:flex-row-reverse mt-8' id='app'>
+                <section id='app' className='flex flex-col lg:flex-row-reverse mt-8'>
                     <div className='flex-1 mb-6'>
                         <h2 className='bg-nlw-gradient bg-clip-text text-transparent font-semibold text-4xl text-center font-landing-page leading-relaxed'>
                             Baixe nosso App
@@ -172,7 +155,7 @@ export function Landing() {
                 </section>
 
                 {/* FALE CONOSCO */}
-                <section className='flex flex-col lg:flex-row' id='contact'>
+                <section id='contact' className='flex flex-col lg:flex-row'>
                     {/* BANNER */}
                     <div className='h-[979px] flex flex-col items-center justify-center gap-[96px] bg-holo bg-cover bg-no-repeat pt-8 px-4 '>
                         <img src={LogoESports} className='w-[400px]' alt="Logo E-Sports" />
@@ -224,6 +207,11 @@ export function Landing() {
                     © Copyright - 2022
                 </span>
             </footer>
+
+            {/* SCROLL TO TOP BUTTON */}
+            <ScrollToTopButton aria-label='Ir até o topo da página'>
+                <ArrowUp size={20} weight='bold' className='text-white' />
+            </ScrollToTopButton>
         </div >
     )
 }
