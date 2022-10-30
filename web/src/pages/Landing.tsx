@@ -37,24 +37,24 @@ export function Landing() {
     Scroll().reveal("#contact", SCROLL_REVEAL_OPTIONS_DEFAULT)
 
     return (
-        <div className="h-screen flex flex-col relative">
+        <div className="h-screen flex flex-col relative scroll-smooth">
             <Header />
 
             <main className='max-w-[1440px] w-full mx-auto flex flex-col'>
                 {/* LANDING PAGE */}
                 <section id='home' className='h-[979px] flex items-center justify-center lg:justify-between px-6 flex-col lg:flex-row'>
                     <div className='flex flex-col gap-2 max-w-[600px]'>
-                        <h1 className='text-[32px] font-bold text-white'>A plataforma digital perfeita para encontrar seu
-                            <strong className='bg-nlw-gradient bg-clip-text text-transparent'> Duo.</strong>
+                        <h1 className='text-[40px] font-bold text-white'>A plataforma digital perfeita para encontrar seu
+                            <strong className='bg-gradient-to-r from-[#9572FC] via-[#43E7AD] to-[#E1D55D] bg-clip-text text-transparent'> Duo.</strong>
                         </h1>
 
                         <span className='max-w-[656px] text-zinc-400'>
                             Conheça nossa plataforma digital e encontre novos amigos para jogar aquele seu jogo favorito.
                         </span>
 
-                        <div className='bg-nlw-gradient flex items-center justify-center h-12 rounded-md w-[172px] mt-6'>
+                        <div className='bg-gradient-to-r from-[#9572FC] via-[#43E7AD] to-[#E1D55D] flex items-center justify-center h-12 rounded-md w-[172px] mt-6'>
                             <button className='h-[46px] w-[170px] bg-[#121214] py-2 px-3 rounded-md'>
-                                <span className='bg-nlw-gradient bg-clip-text text-transparent font-semibold'>
+                                <span className='bg-gradient-to-r from-[#9572FC] via-[#43E7AD] to-[#E1D55D] bg-clip-text text-transparent font-semibold'>
                                     Conectar-se
                                 </span>
                             </button>
@@ -68,11 +68,11 @@ export function Landing() {
                 <section id='about' className='flex flex-col lg:flex-row-reverse'>
                     {/* ARTIGO */}
                     <div className='h-[979px] flex flex-col gap-6 p-6'>
-                        <h2 className='bg-nlw-gradient bg-clip-text text-transparent font-semibold text-4xl text-center font-landing-page leading-relaxed'>
+                        <h2 className='bg-gradient-to-r from-[#9572FC] via-[#43E7AD] to-[#E1D55D] bg-clip-text text-transparent font-semibold text-4xl text-center font-landing-page leading-relaxed'>
                             Conheça nossa plataforma
                         </h2>
 
-                        <article className='flex flex-col gap-6'>
+                        <article className='flex flex-col gap-6 bg-shadow-light h-full'>
                             <p className='text-zinc-400 text-justify font-light leading-relaxed first-letter:text-[32px]'>
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
@@ -128,7 +128,7 @@ export function Landing() {
                 {/* APLICATIVO */}
                 <section id='app' className='flex flex-col lg:flex-row-reverse mt-8'>
                     <div className='flex-1 mb-6'>
-                        <h2 className='bg-nlw-gradient bg-clip-text text-transparent font-semibold text-4xl text-center font-landing-page leading-relaxed'>
+                        <h2 className='bg-gradient-to-r from-[#9572FC] via-[#43E7AD] to-[#E1D55D] bg-clip-text text-transparent font-semibold text-4xl text-center font-landing-page leading-relaxed'>
                             Baixe nosso App
                         </h2>
 
@@ -212,7 +212,7 @@ export function Landing() {
                         <span className='text-xs text-white font-semibold'>GitHub</span>
                     </a>
 
-                    <a className='flex flex-col gap-2 items-center cursor-pointer' href='https://www.linkedin.com/in/rogeriomarquesfernandes/'>
+                    <a className='flex flex-col gap-2 items-center cursor-pointer hover:opacity-75 transition-opacity' href='https://www.linkedin.com/in/rogeriomarquesfernandes/'>
                         <img src={GradientLinkedin} className='w-8 h-8' alt="Linkedin" title='Linkedin' />
                         <span className='text-xs text-white font-semibold'>Linkedin</span>
                     </a>

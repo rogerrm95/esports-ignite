@@ -53,11 +53,11 @@ export function ContactUsForm() {
 
     return (
         <div className='flex flex-col gap-6 p-6'>
-            <h2 className='bg-nlw-gradient bg-clip-text text-transparent font-semibold text-4xl text-center font-landing-page leading-relaxed'>
+            <h2 className='bg-gradient-to-r from-[#9572FC] via-[#43E7AD] to-[#E1D55D] bg-clip-text text-transparent font-semibold text-4xl text-center font-landing-page leading-relaxed'>
                 Fale Conosco
             </h2>
 
-            <p className='text-zinc-300 text-justify leading-relaxed w-[75%]'>
+            <p className='text-zinc-300 text-justify leading-relaxed w-[100%] sm:w-[85%] lg:sm:w-[75%]'>
                 Caso queira nos contactar,
                 por favor preencha o formulário abaixo que entraremos em contato atraves do e-mail enviado.
             </p>
@@ -127,7 +127,3 @@ export function ContactUsForm() {
         </div>
     )
 }
-
-// MENU SUPERIOR RESPONSIVO //
-// BOTÃO SCROLL TO TOP //
-// SCROLL REVEAL //
