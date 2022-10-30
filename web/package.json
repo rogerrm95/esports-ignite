@@ -21,12 +21,14 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.36.1",
     "react-router-dom": "^6.4.1",
+    "scrollreveal": "^4.0.9",
     "swiper": "^8.4.2",
     "zod": "^3.19.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@types/scrollreveal": "^0.0.8",
     "@vitejs/plugin-react": "^2.1.0",
     "autoprefixer": "^10.4.10",
     "postcss": "^8.4.16",

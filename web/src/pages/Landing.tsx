@@ -1,3 +1,5 @@
+import Scroll from 'scrollreveal'
+
 // Components //
 import { DetailsCard } from '../components/Card/DetailsCard'
 import { ContactUsForm } from '../components/Form/ContactUsForm'
@@ -20,7 +22,20 @@ import SuportIcon from '../assets/icons/suport-woman.png'
 import GradientGithub from '../assets/icons/gradient-github.png'
 import GradientLinkedin from '../assets/icons/gradient-linkedin.png'
 
+// Scroll Reveal Options //
+const SCROLL_REVEAL_OPTIONS_DEFAULT = {
+    reset: true,
+    delay: 250,
+    origin: 'top'
+}
+
 export function Landing() {
+    // SCROLL REVEAL SECTIONS //
+    Scroll().reveal("#home", SCROLL_REVEAL_OPTIONS_DEFAULT)
+    Scroll().reveal("#about", SCROLL_REVEAL_OPTIONS_DEFAULT)
+    Scroll().reveal("#app", SCROLL_REVEAL_OPTIONS_DEFAULT)
+    Scroll().reveal("#contact", SCROLL_REVEAL_OPTIONS_DEFAULT)
+
     return (
         <div className="h-screen flex flex-col relative">
             <Header />

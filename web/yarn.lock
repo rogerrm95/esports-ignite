@@ -727,6 +727,11 @@
   "resolved" "https://registry.npmjs.org/@types/scheduler/-/scheduler-0.16.2.tgz"
   "version" "0.16.2"
 
+"@types/scrollreveal@^0.0.8":
+  "integrity" "sha512-HwD3vSmxjEozI4+uHY7pPxB47gppsv0racBHZreEQFC6K1kBKaIUkCTwUMH6gGFEDmLrgOckfGsTvR/n2yyV6g=="
+  "resolved" "https://registry.npmjs.org/@types/scrollreveal/-/scrollreveal-0.0.8.tgz"
+  "version" "0.0.8"
+
 "@vitejs/plugin-react@^2.1.0":
   "integrity" "sha512-am6rPyyU3LzUYne3Gd9oj9c4Rzbq5hQnuGXSMT6Gujq45Il/+bunwq3lrB7wghLkiF45ygMwft37vgJ/NE8IAA=="
   "resolved" "https://registry.npmjs.org/@vitejs/plugin-react/-/plugin-react-2.1.0.tgz"
@@ -1121,6 +1126,18 @@
   dependencies:
     "has" "^1.0.3"
 
+"is-dom-node-list@^1.2.1":
+  "integrity" "sha512-P1H071iT5TGG8pAHslhrLDo/tQLYc8tGuWABVqhGU4l2mm7aDNb9cx2myQ2AujEQO6B2cAujcW4a0/+6UfXInw=="
+  "resolved" "https://registry.npmjs.org/is-dom-node-list/-/is-dom-node-list-1.2.1.tgz"
+  "version" "1.2.1"
+  dependencies:
+    "is-dom-node" "^1.0.4"
+
+"is-dom-node@^1.0.4":
+  "integrity" "sha512-NEnTHKCeyGJTL0cKdzATF8SWzyTMYf5CbNKWBvsXvyMxZG32g+a09qkeCbrfQNLTD85CbPeHb4YjIJCjyzF0yA=="
+  "resolved" "https://registry.npmjs.org/is-dom-node/-/is-dom-node-1.0.4.tgz"
+  "version" "1.0.4"
+
 "is-extglob@^2.1.1":
   "integrity" "sha512-SbKbANkN603Vi4jEZv49LeVJMn4yGwsbzZworEoyEiutsN3nJYdbO36zfhGJ6QEDpOZIFkDtnq5JRxmvl3jsoQ=="
   "resolved" "https://registry.npmjs.org/is-extglob/-/is-extglob-2.1.1.tgz"
@@ -1201,6 +1218,11 @@
   "integrity" "sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q=="
   "resolved" "https://registry.npmjs.org/minimist/-/minimist-1.2.6.tgz"
   "version" "1.2.6"
+
+"miniraf@1.0.0":
+  "integrity" "sha512-XpvhtJYzVrpXe+JoAthrT9E40NIrSDDMcdHEYL2M+lR/OCas0nadetcBBq/MWYqlgV5aDWVQ3mfAqd+fG6Y/EQ=="
+  "resolved" "https://registry.npmjs.org/miniraf/-/miniraf-1.0.0.tgz"
+  "version" "1.0.0"
 
 "ms@2.1.2":
   "integrity" "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w=="
@@ -1407,6 +1429,11 @@
   "resolved" "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz"
   "version" "0.13.9"
 
+"rematrix@0.3.0":
+  "integrity" "sha512-xB/9ZvJIKaDgXX0qkvV9/pLD8zK23A6TVV6F8Vhsl+SrxbBeVYutz5uszxgC6Rt3RP9LZiH8OXaYjr+x6WXWmQ=="
+  "resolved" "https://registry.npmjs.org/rematrix/-/rematrix-0.3.0.tgz"
+  "version" "0.3.0"
+
 "resolve@^1.1.7", "resolve@^1.22.1":
   "integrity" "sha512-nBpuuYuY5jFsli/JIs1oldw6fOQCBioohqWZg/2hiaOybXOft4lonv85uDOKXdf8rhyK159cxU5cDcK/NKk8zw=="
   "resolved" "https://registry.npmjs.org/resolve/-/resolve-1.22.1.tgz"
@@ -1446,6 +1473,15 @@
   "version" "0.23.0"
   dependencies:
     "loose-envify" "^1.1.0"
+
+"scrollreveal@^4.0.9":
+  "integrity" "sha512-fefGvzVS8YbXbDK1+T0kvy2yqxaiBJZeGUhPeqajf+7sGqtX4xikbKGAlzQuPCpswAMswx94ZwhDjXKnRIqW1w=="
+  "resolved" "https://registry.npmjs.org/scrollreveal/-/scrollreveal-4.0.9.tgz"
+  "version" "4.0.9"
+  dependencies:
+    "miniraf" "1.0.0"
+    "rematrix" "0.3.0"
+    "tealight" "0.3.6"
 
 "semver@^6.3.0":
   "integrity" "sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw=="
@@ -1514,6 +1550,14 @@
     "postcss-value-parser" "^4.2.0"
     "quick-lru" "^5.1.1"
     "resolve" "^1.22.1"
+
+"tealight@0.3.6":
+  "integrity" "sha512-Dys3N8jFBThD9pNVpPCyUiu6DfWcTBdqWQJIvnAuVaFkGEdrPBJ43070vVbn6sTlLvn2IQK2zFW4FrVIrTo8eQ=="
+  "resolved" "https://registry.npmjs.org/tealight/-/tealight-0.3.6.tgz"
+  "version" "0.3.6"
+  dependencies:
+    "is-dom-node" "^1.0.4"
+    "is-dom-node-list" "^1.2.1"
 
 "to-fast-properties@^2.0.0":
   "integrity" "sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog=="
