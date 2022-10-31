@@ -1,7 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog"
 // Icons & Images //
-import { List, SignIn } from "phosphor-react";
-import { useState } from "react";
+import { SignIn } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
 import LogoESports from '../../assets/logo-esports.svg'
 import { MenuDropdown } from "../MenuDropdown";
@@ -25,7 +24,7 @@ export function NavBarLanding() {
 
             <button
                 className='h-10 py-2 px-2 gap-3 md:flex hidden items-center justify-center bg-violet-500 rounded-md hover:bg-violet-600 transition-colors'
-                onClick={() => { navigate('/login') }}
+                onClick={() => { navigate('/', {replace: true}) }}
             >
                 <span className='text-white text-xs hidden lg:block'>Acessar</span>
                 <SignIn size={20} color='#FFF' weight='bold' />

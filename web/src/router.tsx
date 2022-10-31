@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { useUser } from './hooks/useUser'
 // Pages //
 import { Login } from './pages/Login'
@@ -10,24 +10,19 @@ export function Router() {
     const { userDiscord } = useUser()
 
     return (
-        <Routes >
+        <Routes>
             {
                 userDiscord.id ? (
-                    <Route>
+                    <>
                         <Route path='/' element={<Home />} />
                         <Route path='/games/:id/ads' element={<Game />} />
-                    </Route>
+                    </>
                 ) : (
-                    <Route path='/' element={<Landing />} />
+                    <Route path='/' element={<Login />} />
                 )
             }
 
+            <Route path='/esports' element={<Landing />} />
         </Routes>
     )
 }
-
-// esports.com/
-
-// Fazem o uso do Contexto 
-// esports.com/login
-// esports.com/home

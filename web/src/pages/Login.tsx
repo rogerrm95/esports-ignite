@@ -1,13 +1,13 @@
 // Imagens //
 import { useEffect } from 'react'
 import { useUser } from '../hooks/useUser'
-import { useNavigate } from 'react-router-dom'
 // Images //
 import { DiscordLogo, Spinner } from 'phosphor-react'
 import LogoESports from '../assets/logo-esports.svg'
+import { useNavigate } from 'react-router-dom'
 
 export function Login() {
-    const { isLoading, userDiscord, loginWithDiscord } = useUser()
+    const { isLoading, loginWithDiscord } = useUser()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -30,7 +30,7 @@ export function Login() {
 
             <div className='max-w-[500px] w-[100%] mx-auto mt-20 flex flex-col p-6 bg-[#2a2634bb] rounded-md shadow-2xl shadow-black'>
                 {
-                    isLoading  ? (
+                    isLoading ? (
                         <div className='flex flex-col items-center justify-center w-[100%] h-[304px] text-center'>
                             <Spinner size={24} className='text-zinc-200 animate-spin-slow' weight='bold' />
                             <span className='text-zinc-200'>

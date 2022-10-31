@@ -31,7 +31,7 @@ export function MenuDropdown() {
 
                     <button
                         className='h-10 py-2 px-2 gap-3 flex items-center justify-center bg-violet-500 rounded-md hover:bg-violet-600 transition-colors mt-auto'
-                        onClick={() => nagivate('/login')}
+                        onClick={() => nagivate('/')}
                     >
                         <span className='text-white text-xs'>Acessar</span>
                         <SignIn size={20} color='#FFF' weight='bold' />

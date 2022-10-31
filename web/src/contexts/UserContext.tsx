@@ -22,6 +22,7 @@ interface UserContextData {
 export const UserContext = createContext<UserContextData>({} as UserContextData)
 
 export function UserContextProvider({ children }: UserContextProvider) {
+
     const [isLoading, setIsLoading] = useState(true)
     const [userDiscord, setUserDiscord] = useState({} as UserDiscord)
 
@@ -30,10 +31,11 @@ export function UserContextProvider({ children }: UserContextProvider) {
 
         if (dataJSON) {
             const user = JSON.parse(dataJSON)
-            setIsLoading(false)
             setUserDiscord(user)
+            setIsLoading(false)
         } else {
             setUserDiscord({} as UserDiscord)
+            setIsLoading(false)
         }
 
     }, [])

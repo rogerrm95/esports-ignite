@@ -1,5 +1,5 @@
-import Scroll from 'scrollreveal'
-
+import ScrollReveal from 'scrollreveal'
+import { useNavigate } from 'react-router-dom'
 // Components //
 import { DetailsCard } from '../components/Card/DetailsCard'
 import { ContactUsForm } from '../components/Form/ContactUsForm'
@@ -25,19 +25,21 @@ import GradientLinkedin from '../assets/icons/gradient-linkedin.png'
 // Scroll Reveal Options //
 const SCROLL_REVEAL_OPTIONS_DEFAULT = {
     reset: true,
-    delay: 250,
+    delay: 0,
     origin: 'top'
 }
 
 export function Landing() {
     // SCROLL REVEAL SECTIONS //
-    Scroll().reveal("#home", SCROLL_REVEAL_OPTIONS_DEFAULT)
-    Scroll().reveal("#about", SCROLL_REVEAL_OPTIONS_DEFAULT)
-    Scroll().reveal("#app", SCROLL_REVEAL_OPTIONS_DEFAULT)
-    Scroll().reveal("#contact", SCROLL_REVEAL_OPTIONS_DEFAULT)
+    ScrollReveal().reveal("#home", SCROLL_REVEAL_OPTIONS_DEFAULT)
+    ScrollReveal().reveal("#about", SCROLL_REVEAL_OPTIONS_DEFAULT)
+    ScrollReveal().reveal("#app", SCROLL_REVEAL_OPTIONS_DEFAULT)
+    ScrollReveal().reveal("#contact", SCROLL_REVEAL_OPTIONS_DEFAULT)
+
+    const navigate = useNavigate()
 
     return (
-        <div className="h-screen flex flex-col relative scroll-smooth">
+        <div className="h-screen flex flex-col relative">
             <Header />
 
             <main className='max-w-[1440px] w-full mx-auto flex flex-col'>
@@ -53,7 +55,7 @@ export function Landing() {
                         </span>
 
                         <div className='bg-gradient-to-r from-[#9572FC] via-[#43E7AD] to-[#E1D55D] flex items-center justify-center h-12 rounded-md w-[172px] mt-6'>
-                            <button className='h-[46px] w-[170px] bg-[#121214] py-2 px-3 rounded-md'>
+                            <button className='h-[46px] w-[170px] bg-[#121214] py-2 px-3 rounded-md' onClick={() => navigate('/')}>
                                 <span className='bg-gradient-to-r from-[#9572FC] via-[#43E7AD] to-[#E1D55D] bg-clip-text text-transparent font-semibold'>
                                     Conectar-se
                                 </span>
