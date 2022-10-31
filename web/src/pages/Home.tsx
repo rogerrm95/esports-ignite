@@ -64,7 +64,7 @@ export function Home() {
             <img src={LogoESports} alt="E-Sports" />
 
             <h1 className='xl:text-6xl md:text-5xl text-4xl text-white font-black mt-20 nlw-gradient'>
-                Seu <span className='bg-nlw-gradient bg-clip-text text-transparent'>duo</span> está aqui.
+                Seu <span className='bg-gradient-to-r from-[#9572FC] via-[#43E7AD] to-[#E1D55D] bg-clip-text text-transparent'>duo</span> está aqui.
             </h1>
 
             {/* LISTA DOS GAMES */}
