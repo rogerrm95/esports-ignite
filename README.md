@@ -30,6 +30,7 @@ Web:
 - [Radix UI](https://www.radix-ui.com/);
 - [ReactJS](https://pt-br.reactjs.org/);
 - [React-Router](https://reactrouter.com/en/main);
+- [Scroll Reveal](https://scrollrevealjs.org/);
 - [Swiper](https://swiperjs.com/);
 - [Tailwind CSS](https://tailwindcss.com/);
 - [Vite](https://vitejs.dev/).
