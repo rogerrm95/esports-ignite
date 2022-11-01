@@ -40,9 +40,9 @@ Web and Mobile:
 - [Typescript](https://www.typescriptlang.org/);
 - [Yup](https://github.com/jquense/yup).
 
-# 🚧 E-Sports 2.0
+# ✔ E-Sports 2.0
 
-- Landing Page (Web) 🚧;
+- Landing Page (Web) ✔;
 - Validação dos formulários (Web e Mobile) ✔;
 - Responsividade (Web) ✔;
 - Criar anúncio (Mobile) ✔;
